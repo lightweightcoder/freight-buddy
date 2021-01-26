@@ -2,6 +2,13 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
+// import functions to initialise models
+import initCountryModel from './country.mjs';
+import initCategoryModel from './category.mjs';
+import initUserModel from './user.mjs';
+import initRequestModel from './request.mjs';
+import initProductPhotoModel from './productPhoto.mjs';
+
 const env = process.env.NODE_ENV || 'development';
 
 const config = allConfig[env];
@@ -29,6 +36,29 @@ if (env === 'production') {
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+// initalise models and store as methods in db object
+db.Country = initCountryModel(sequelize, Sequelize.DataTypes);
+db.Category = initCategoryModel(sequelize, Sequelize.DataTypes);
+db.User = initUserModel(sequelize, Sequelize.DataTypes);
+db.Request = initRequestModel(sequelize, Sequelize.DataTypes);
+db.ProductPhoto = initProductPhotoModel(sequelize, Sequelize.DataTypes);
+
+// create the associations between models
+db.Country.hasMany(db.Request);
+db.Request.belongsTo(db.Country);
+
+db.Country.hasMany(db.User);
+db.User.belongsTo(db.Country);
+
+db.Category.hasMany(db.Request);
+db.Request.belongsTo(db.Category);
+
+db.User.hasMany(db.Request);
+db.Request.belongsTo(db.User);
+
+db.Request.hasMany(db.ProductPhoto);
+db.ProductPhoto.belongsTo(db.Request);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
