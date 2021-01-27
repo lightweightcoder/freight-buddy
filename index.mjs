@@ -24,8 +24,6 @@ app.use(methodOverride('_method'));
 app.use(express.static('public'));
 // Expose the files stored in the distribution folder
 app.use(express.static('dist'));
-// add the configs so that Express.js will serve files from the uploads directory
-app.use(express.static('uploads'));
 
 // Set up Webpack in dev env
 const env = process.env.NODE_ENV || 'development';

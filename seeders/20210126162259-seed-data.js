@@ -1,24 +1,28 @@
-const { getNames } = require('country-list');
+// import seed data
+const seedData = require('../utilities/seed-data');
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
+    const {
+      countriesList, categoriesList, usersList, requestsList, productPhotosList,
+    } = seedData;
+
+    try {
+      await queryInterface.bulkInsert('countries', countriesList);
+      await queryInterface.bulkInsert('categories', categoriesList);
+      await queryInterface.bulkInsert('users', usersList);
+      await queryInterface.bulkInsert('requests', requestsList);
+      await queryInterface.bulkInsert('product_photos', productPhotosList);
+    } catch (error) {
+      console.log(error);
+    }
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
+    await queryInterface.bulkDelete('countries', null, {});
+    await queryInterface.bulkDelete('categories', null, {});
+    await queryInterface.bulkDelete('users', null, {});
+    await queryInterface.bulkDelete('requests', null, {});
+    await queryInterface.bulkDelete('product_photos', null, {});
   },
 };
