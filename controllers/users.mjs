@@ -51,5 +51,26 @@ export default function users(db) {
     }
   };
 
-  return { login };
+  const getRegistrationPage = async (req, res) => {
+    console.log('render a registration page');
+
+    // set object to store array of countries data from the database
+    const templateData = {};
+
+    try {
+      // find array of countries data
+      const countries = await db.Country.findAll();
+
+      templateData.countries = countries;
+
+      // render the registration page
+      res.render('register', templateData);
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
+  return { login, getRegistrationPage };
 }

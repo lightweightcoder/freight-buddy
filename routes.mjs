@@ -22,4 +22,7 @@ export default function routes(app) {
 
   // accept login form request
   app.post('/login', UsersController.login);
+
+  // registration page
+  app.get('/register', UsersController.getRegistrationPage);
 }
