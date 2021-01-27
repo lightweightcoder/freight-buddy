@@ -9,13 +9,9 @@ export default function initCountryModel(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
     },
-    createdAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-    },
-    updatedAt: {
-      allowNull: false,
-      type: DataTypes.DATE,
-    },
-  }, { underscored: true });
+  },
+  {
+    underscored: true,
+    timestamps: false,
+  });
 }
