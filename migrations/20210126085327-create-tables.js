@@ -56,6 +56,9 @@ module.exports = {
           key: 'id',
         },
       },
+      photo: {
+        type: Sequelize.STRING,
+      },
       created_at: {
         allowNull: false,
         type: Sequelize.DATE,
