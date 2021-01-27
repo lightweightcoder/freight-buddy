@@ -52,6 +52,9 @@ export default function initRequestModel(sequelize, DataTypes) {
     status: {
       type: DataTypes.ENUM('requested', 'accepted', 'shipped', 'completed', 'cancelled'),
     },
+    shippingAddress: {
+      type: DataTypes.STRING,
+    },
     createdAt: {
       allowNull: false,
       type: DataTypes.DATE,

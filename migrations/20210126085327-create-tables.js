@@ -49,6 +49,9 @@ module.exports = {
       bank_account_number: {
         type: Sequelize.STRING,
       },
+      address: {
+        type: Sequelize.STRING,
+      },
       country_id: {
         type: Sequelize.INTEGER,
         references: {
@@ -121,6 +124,9 @@ module.exports = {
       },
       status: {
         type: Sequelize.ENUM('requested', 'accepted', 'shipped', 'completed', 'cancelled'),
+      },
+      shipping_address: {
+        type: Sequelize.STRING,
       },
       created_at: {
         allowNull: false,

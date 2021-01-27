@@ -24,12 +24,18 @@ export default function initUserModel(sequelize, DataTypes) {
     bankAccountNumber: {
       type: DataTypes.STRING,
     },
+    address: {
+      type: DataTypes.STRING,
+    },
     countryId: {
       type: DataTypes.INTEGER,
       references: {
         model: 'countries',
         key: 'id',
       },
+    },
+    photo: {
+      type: DataTypes.STRING,
     },
     createdAt: {
       allowNull: false,
