@@ -1,0 +1,55 @@
+#form-container {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border-color: var(--main-border-color);
+}
+
+#invalid-message {
+  color: red;
+  text-align: center;
+}
+
+p,
+a {
+  font-size: 0.8rem;
+}
+
+h4,
+h5 {
+  text-align: center;
+}
+
+.btn {
+  margin-top: 10px;
+}
+
+label {
+  margin-bottom: 5px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+form {
+  margin-top: 15px;
+}
+
+/* for bootstrap col-sm */
+@media (min-width: 576px) {
+}
+
+/* for bootstrap col-md */
+@media (min-width: 768px) {
+}
+
+/* for bootstrap col-lg */
+@media (min-width: 992px) {
+}
+
+/* for bootstrap col-xl */
+@media (min-width: 1200px) {
+}
