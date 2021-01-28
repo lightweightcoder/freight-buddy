@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // import components
-import Navbar from './components/Navbar.jsx';
+import TopNavbar from './components/TopNavbar.jsx';
 
 // states to determine which components to load
 const pages = {
@@ -16,7 +16,7 @@ export default function App() {
   // for the home page
   return (
     <div>
-      <Navbar user={user} setPage={setPage} />
+      <TopNavbar user={user} setPage={setPage} />
     </div>
   );
 }
