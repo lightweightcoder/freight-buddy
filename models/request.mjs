@@ -46,7 +46,7 @@ export default function initRequestModel(sequelize, DataTypes) {
     referenceLink: {
       type: DataTypes.STRING,
     },
-    payment_filename: {
+    paymentFilename: {
       type: DataTypes.STRING,
     },
     status: {

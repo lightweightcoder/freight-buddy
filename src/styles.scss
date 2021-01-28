@@ -10,3 +10,61 @@ body {
     margin-left: auto;
   }
 }
+
+.request-card-link {
+  text-decoration: none;
+}
+
+.request-card {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.request-card-productName,
+.request-card-price,
+.request-card-country {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: black;
+  margin-bottom: 0.1rem;
+}
+
+.request-card-productName {
+  font-size: 3vw;
+}
+
+.request-card-country {
+  font-size: 3vw;
+}
+
+.request-card-price {
+  font-size: 2.5vw;
+}
+
+/* for bootstrap col-sm */
+@media (min-width: 576px) {
+  .request-card-productName {
+    font-size: 0.8rem;
+  }
+
+  .request-card-country {
+    font-size: 0.8rem;
+  }
+
+  .request-card-price {
+    font-size: 0.7rem;
+  }
+}
+
+/* for bootstrap col-md */
+@media (min-width: 768px) {
+}
+
+/* for bootstrap col-lg */
+@media (min-width: 992px) {
+}
+
+/* for bootstrap col-xl */
+@media (min-width: 1200px) {
+}

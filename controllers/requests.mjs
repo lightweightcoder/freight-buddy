@@ -14,7 +14,10 @@ export default function requests(db) {
         where: {
           status: 'requested',
         },
-        include: db.Country,
+        include: [
+          db.Country,
+          db.ProductPhoto,
+        ],
       });
 
       data.requestsList = requestsList;

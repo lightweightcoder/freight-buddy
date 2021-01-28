@@ -54,8 +54,8 @@ db.User.belongsTo(db.Country);
 db.Category.hasMany(db.Request);
 db.Request.belongsTo(db.Category);
 
-// db.User.hasMany(db.Request);
-// db.Request.belongsTo(db.User, { as: 'requester', foreignKey: 'requester_id' });
+db.User.hasMany(db.Request, { as: 'requests', foreignKey: 'requester_id' });
+db.Request.belongsTo(db.User, { as: 'requesters', foreignKey: 'requester_id' });
 
 db.Request.hasMany(db.ProductPhoto);
 db.ProductPhoto.belongsTo(db.Request);
