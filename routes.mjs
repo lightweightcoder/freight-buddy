@@ -25,4 +25,7 @@ export default function routes(app) {
 
   // registration page
   app.get('/register', UsersController.getRegistrationPage);
+
+  // register a user
+  app.post('/register', UsersController.register);
 }
