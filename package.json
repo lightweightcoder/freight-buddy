@@ -49,6 +49,7 @@
     "webpack-merge": "^5.7.3"
   },
   "dependencies": {
+    "bootstrap": "^4.6.0",
     "cookie-parser": "^1.4.5",
     "country-list": "^2.2.0",
     "ejs": "^3.1.5",
