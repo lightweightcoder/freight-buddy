@@ -51,6 +51,7 @@ export default function checkAuthMiddleware(db) {
 
       // send back a null object to indicate there is no valid loggedin user
       req.user = null;
+      next();
 
       // return so it wont go below
       return;
@@ -61,6 +62,7 @@ export default function checkAuthMiddleware(db) {
 
     // send back a null object to indicate there is no valid loggedin user
     req.user = null;
+    next();
 
     // for axios requests
     // res.send(403);

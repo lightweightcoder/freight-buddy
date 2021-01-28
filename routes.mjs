@@ -1,12 +1,18 @@
 import { resolve } from 'path';
 import db from './models/index.mjs';
 
+// import checkAuth middleware
+import checkAuthMiddleware from './utilities/check-auth.mjs';
+
 // import controllers
 import users from './controllers/users.mjs';
+import requests from './controllers/requests.mjs';
 
 export default function routes(app) {
   // pass in db for all callbacks in controllers
+  const checkAuth = checkAuthMiddleware(db);
   const UsersController = users(db);
+  const RequestsController = requests(db);
 
   // special JS page. Include the webpack index.html file
   app.get('/home', (request, response) => {
@@ -28,4 +34,7 @@ export default function routes(app) {
 
   // register a user
   app.post('/register', UsersController.register);
+
+  // get a list of available requests
+  app.get('/requests', checkAuth, RequestsController.index);
 }

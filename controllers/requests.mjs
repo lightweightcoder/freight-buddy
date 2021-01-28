@@ -10,13 +10,14 @@ export default function requests(db) {
       // previous middleware, checkAuth
       const { user } = req;
 
-      const requests = await db.Request.findAll({
+      const requestsList = await db.Request.findAll({
         where: {
           status: 'requested',
         },
+        include: db.Country,
       });
-      console.log('requests are', requests);
 
+      data.requestsList = requestsList;
       data.user = user;
       res.send(data);
     } catch (error) {
