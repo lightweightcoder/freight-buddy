@@ -4,7 +4,7 @@ import Carousel from 'react-multi-carousel';
 // import 'react-multi-carousel/lib/styles.css';
 import RequestCard from './RequestCard.jsx';
 
-export default function HomePage({ setUser }) {
+export default function HomePage({ setUser, selectAndViewARequestPage }) {
   const [requests, setRequests] = useState(null);
 
   // used for carousell component
@@ -39,6 +39,10 @@ export default function HomePage({ setUser }) {
       });
   }, []);
 
+  if (requests === null) {
+    return <div />;
+  }
+
   return (
     <div>
       {/* <Carousel
@@ -67,10 +71,10 @@ export default function HomePage({ setUser }) {
       ; */}
       <div className="container">
         <div className="row">
-          {requests ? requests.map((request) => (
+          {requests.map((request) => (
             // eslint-disable-next-line max-len
-            <RequestCard photo={request.product_photos[0].filename} productName={request.productName} price={request.price} country={request.country.name} />
-          )) : '' }
+            <RequestCard key={request.id} photo={request.product_photos[0].filename} productName={request.productName} price={request.price} country={request.country.name} id={request.id} selectAndViewARequestPage={selectAndViewARequestPage} />
+          ))}
         </div>
       </div>
     </div>

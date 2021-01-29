@@ -2,11 +2,19 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 
 export default function RequestCard({
-  photo, productName, price, country,
+  photo, productName, price, country, id, selectAndViewARequestPage,
 }) {
+  // handler for clicking on a request card
+  const handleClick = (e) => {
+    e.preventDefault();
+    // set a selected request id, then set the state of the page to
+    // to display the request details
+    selectAndViewARequestPage(id);
+  };
+
   return (
     <div className="col-4 col-md-3">
-      <a href="#linktorequest" className="request-card-link">
+      <a href="#view-request" className="request-card-link" onClick={handleClick}>
         <Card className="request-card">
           <Card.Img variant="top" src={photo} />
           <Card.Body>
