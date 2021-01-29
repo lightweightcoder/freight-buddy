@@ -54,8 +54,10 @@ db.User.belongsTo(db.Country);
 db.Category.hasMany(db.Request);
 db.Request.belongsTo(db.Category);
 
-db.User.hasMany(db.Request, { as: 'requests', foreignKey: 'requester_id' });
-db.Request.belongsTo(db.User, { as: 'requesters', foreignKey: 'requester_id' });
+db.User.hasMany(db.Request, { foreignKey: 'requesterId' });
+// mentioning as will allow sequelize to create getter and setter mtds (eg. getRequester)
+// and create a requesterId column in the requests table if not already created in the model
+db.Request.belongsTo(db.User, { as: 'requester' });
 
 db.Request.hasMany(db.ProductPhoto);
 db.ProductPhoto.belongsTo(db.Request);
