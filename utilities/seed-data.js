@@ -240,6 +240,12 @@ const productPhotosList = [
     updated_at: new Date(),
   },
   {
+    request_id: 1,
+    filename: 'https://images-sg.girlstyle.com/wp-content/uploads/2021/01/8e044402.png',
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
     request_id: 2,
     filename: '/images/products/sg-dream.jpg',
     created_at: new Date(),

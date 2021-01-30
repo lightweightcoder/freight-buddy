@@ -1,5 +1,5 @@
 export default function initProductPhotoModel(sequelize, DataTypes) {
-  return sequelize.define('product_photo', {
+  return sequelize.define('productPhoto', {
     id: {
       allowNull: false,
       autoIncrement: true,

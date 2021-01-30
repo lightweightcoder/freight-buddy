@@ -21,25 +21,45 @@ export default function RequestHelperView({ selectedRequestId }) {
       });
   }, []);
 
+  // create jsx for carousel items
+  let carouselItems = (
+    <Carousel.Item>
+      <img
+        className="d-block w-100"
+        src="https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg"
+        alt="First slide"
+      />
+    </Carousel.Item>
+  );
+
+  if (requestDetails !== null) {
+    carouselItems = requestDetails.productPhotos.map((photo, index) => (
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src={photo.filename}
+          alt={`${index + 1} slide`}
+        />
+      </Carousel.Item>
+    ));
+  }
+
+  const nextIcon = <span aria-hidden="true" className="fas fa-angle-right fa-2x" />;
+  const prevIcon = <span aria-hidden="true" className="fas fa-angle-left fa-2x" />;
+
   return (
     <div className="container">
       <div className="row">
-        <div className="col-12" id="request-items-photos">
-          <div className="row">
-            <div className="col-6 col-md-12">
-              <Carousel>
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100"
-                    src="https://pizzadelivery.com.sg/wp-content/uploads/2020/08/Smoked-Duck-800x800.jpg"
-                    alt="First slide"
-                  />
-                </Carousel.Item>
+        <div className="col-12 col-sm-5" id="request-items-photos">
+          <div className="row d-flex justify-content-center">
+            <div className="col-6 col-sm-12">
+              <Carousel prevLabel="" nextLabel="" nextIcon={nextIcon} prevIcon={prevIcon}>
+                { carouselItems }
               </Carousel>
             </div>
           </div>
         </div>
-        <div className="col-12">
+        <div className="col-12 col-sm-7">
           { /* request contents */ }
         </div>
       </div>
