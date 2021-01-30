@@ -2,14 +2,14 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 
 export default function RequestCard({
-  photo, productName, price, country, id, selectAndViewARequestPage,
+  photo, productName, price, country, id, SHOW_REQUEST_HELPER_VIEW,
 }) {
   // handler for clicking on a request card
   const handleClick = (e) => {
     e.preventDefault();
     // set a selected request id, then set the state of the page to
-    // to display the request details
-    selectAndViewARequestPage(id);
+    // to display the request details in helper view
+    SHOW_REQUEST_HELPER_VIEW(id);
   };
 
   return (

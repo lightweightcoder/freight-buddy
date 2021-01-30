@@ -8,7 +8,7 @@ import HomePage from './components/HomePage.jsx';
 // states to determine which components to load
 const pages = {
   HOME: 'HOME',
-  SHOW_REQUEST: 'SHOW_REQUEST',
+  SHOW_REQUEST_HELPER_VIEW: 'SHOW_REQUEST_HELPER_VIEW',
 };
 
 export default function App() {
@@ -18,17 +18,17 @@ export default function App() {
 
   // set a selected request id, then set the state of the page to
   // to display the request details
-  // this occurs when the user clicks on a request
-  const selectAndViewARequestPage = (id) => {
+  // this occurs when a potential helper clicks on a request at the homepage
+  const selectAndViewARequestPageHelper = (id) => {
     setSelectedRequestId(id);
 
-    setPage(pages.SHOW_REQUEST);
+    setPage(pages.SHOW_REQUEST_HELPER_VIEW);
   };
 
   return (
     <div>
       <TopNavbar user={user} setPage={setPage} />
-      {(page === pages.HOME) ? <HomePage setUser={setUser} setSelectedRequestId={setSelectedRequestId} selectAndViewARequestPage={selectAndViewARequestPage} /> : ''}
+      {(page === pages.HOME) ? <HomePage setUser={setUser} setSelectedRequestId={setSelectedRequestId} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
     </div>
   );
 }
