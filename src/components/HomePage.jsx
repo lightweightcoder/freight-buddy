@@ -30,7 +30,7 @@ export default function HomePage({ setUser, selectAndViewARequestPageHelper }) {
         <div className="row">
           {requests.map((request) => (
             // eslint-disable-next-line max-len
-            <RequestCard key={request.id} photo={request.product_photos[0].filename} productName={request.productName} price={request.price} country={request.country.name} id={request.id} selectAndViewARequestPage={selectAndViewARequestPageHelper} />
+            <RequestCard key={request.id} photo={request.product_photos[0].filename} productName={request.productName} price={request.price} country={request.country.name} id={request.id} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} />
           ))}
         </div>
       </div>

@@ -30,7 +30,7 @@ export default function App() {
     <div>
       <TopNavbar user={user} setPage={setPage} />
       {(page === pages.HOME) ? <HomePage setUser={setUser} setSelectedRequestId={setSelectedRequestId} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
-      {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView requestId={selectedRequestId} /> : '')}
+      {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView selectedRequestId={selectedRequestId} /> : '')}
     </div>
   );
 }
