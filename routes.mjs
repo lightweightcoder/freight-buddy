@@ -37,4 +37,7 @@ export default function routes(app) {
 
   // get a list of available requests
   app.get('/requests', checkAuth, RequestsController.index);
+
+  // get a request's details
+  app.get('/requests/:id', checkAuth, RequestsController.show);
 }

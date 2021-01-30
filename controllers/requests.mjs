@@ -30,5 +30,32 @@ export default function requests(db) {
     }
   };
 
-  return { index };
+  const show = async (req, res) => {
+    console.log('request to render a request');
+
+    // set object to store data to be sent to response
+    const data = {};
+
+    try {
+      const request = await db.Request.findOne({
+        where: {
+          id: req.params.id,
+        },
+        include: [
+          db.Country,
+          db.ProductPhoto,
+          { model: db.User, as: 'requester' },
+        ],
+      });
+
+      data.request = request;
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
+  return { index, show };
 }

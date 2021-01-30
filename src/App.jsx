@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 // import components
 import TopNavbar from './components/TopNavbar.jsx';
 import HomePage from './components/HomePage.jsx';
+import RequestHelperView from './components/RequestHelperView.jsx';
 
 // states to determine which components to load
 const pages = {
@@ -29,6 +30,7 @@ export default function App() {
     <div>
       <TopNavbar user={user} setPage={setPage} />
       {(page === pages.HOME) ? <HomePage setUser={setUser} setSelectedRequestId={setSelectedRequestId} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
+      {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView requestId={selectedRequestId} /> : '')}
     </div>
   );
 }
