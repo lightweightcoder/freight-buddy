@@ -1,18 +1,19 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import CarouselItems from './CarouselItems.jsx';
+// import CarouselItems from './CarouselItems.jsx';
+import RequestHelperViewButton from './RequestHelperViewButton.jsx';
 
 export default function RequestHelperView({ selectedRequest }) {
   // variable to store JSX of the carousel items
   let carouselItems = '';
-  const [buttonText, setButtonText] = useState(null);
+  // const [buttonText, setButtonText] = useState('');
 
   if (selectedRequest === null) {
     return <div />;
   }
 
-  // create the photos of the request's product
+  // create the photos of the request's product for the carousel
   if (selectedRequest.productPhotos.length > 0) {
     carouselItems = selectedRequest.productPhotos.map((photo, index) => (
       <Carousel.Item key={photo.filename}>
@@ -38,6 +39,8 @@ export default function RequestHelperView({ selectedRequest }) {
 
   const nextIcon = <span aria-hidden="true" className="fas fa-angle-right fa-2x" />;
   const prevIcon = <span aria-hidden="true" className="fas fa-angle-left fa-2x" />;
+
+  // create a button to allow the helper to cancel his/her help
 
   return (
     <div className="container">
@@ -91,7 +94,7 @@ export default function RequestHelperView({ selectedRequest }) {
       </div>
       <div className="row">
         <div className="col-12">
-          <button type="button" className="btn btn-primary">confirm</button>
+          <RequestHelperViewButton status={selectedRequest.status} />
         </div>
       </div>
     </div>
