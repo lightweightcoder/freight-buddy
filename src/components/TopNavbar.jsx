@@ -5,7 +5,7 @@ import Nav from 'react-bootstrap/Nav';
 export default function TopNavbar({ user }) {
   const loggedInNavbar = (
     <Navbar collapseOnSelect expand="md" bg="light" variant="light" className="top-navbar">
-      <Navbar.Brand href="#home">
+      <Navbar.Brand href="/">
         <img
           src="/package.svg"
           width="30"
