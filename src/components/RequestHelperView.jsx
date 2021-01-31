@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import CarouselItems from './CarouselItems.jsx';
 
 export default function RequestHelperView({ selectedRequest }) {
   // variable to store JSX of the carousel items
@@ -54,6 +55,7 @@ export default function RequestHelperView({ selectedRequest }) {
             <div className="col-6 col-sm-12">
               <Carousel prevLabel="" nextLabel="" nextIcon={nextIcon} prevIcon={prevIcon}>
                 { carouselItems }
+                {/* <CarouselItems selectedRequest={selectedRequest} /> */}
               </Carousel>
             </div>
           </div>
