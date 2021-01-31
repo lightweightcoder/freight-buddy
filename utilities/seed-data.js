@@ -269,12 +269,6 @@ const productPhotosList = [
     created_at: new Date(),
     updated_at: new Date(),
   },
-  {
-    request_id: 6,
-    filename: '/images/products/dress.jpg',
-    created_at: new Date(),
-    updated_at: new Date(),
-  },
 ];
 
 // export the seed data as a module
