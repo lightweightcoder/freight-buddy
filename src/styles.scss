@@ -2,15 +2,18 @@ body {
   background-color: pink;
 }
 
+/* for navbar component */
 .top-navbar {
   padding-left: 1rem;
   padding-right: 1rem;
+  margin-bottom: 50px;
 
   #items {
     margin-left: auto;
   }
 }
 
+/* for RequestCard component */
 .request-card-link {
   text-decoration: none;
 }
@@ -42,8 +45,31 @@ body {
   font-size: 2.5vw;
 }
 
+/* for RequestHelperView component */
+.fas {
+  color: black;
+}
+
+.product-name {
+  text-align: center;
+
+  h4 {
+    margin-bottom: 0px;
+  }
+}
+
+.offered-price-heading {
+  margin-bottom: 0px;
+}
+
+.after-carousel-divider {
+  display: block;
+  margin-top: 25px;
+}
+
 /* for bootstrap col-sm */
 @media (min-width: 576px) {
+  /* for RequestCard component */
   .request-card-productName {
     font-size: 0.8rem;
   }
@@ -55,10 +81,15 @@ body {
   .request-card-price {
     font-size: 0.7rem;
   }
-}
 
-.fas {
-  color: black;
+  /* for RequestHelperView component */
+  .product-name {
+    text-align: left;
+  }
+
+  .after-carousel-divider {
+    display: none;
+  }
 }
 
 /* for bootstrap col-md */
