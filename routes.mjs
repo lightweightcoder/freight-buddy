@@ -7,12 +7,16 @@ import checkAuthMiddleware from './utilities/check-auth.mjs';
 // import controllers
 import users from './controllers/users.mjs';
 import requests from './controllers/requests.mjs';
+import countries from './controllers/countries.mjs';
+import categories from './controllers/categories.mjs';
 
 export default function routes(app) {
   // pass in db for all callbacks in controllers
   const checkAuth = checkAuthMiddleware(db);
   const UsersController = users(db);
   const RequestsController = requests(db);
+  const CountriesController = countries(db);
+  const CategoriesController = categories(db);
 
   // special JS page. Include the webpack index.html file
   app.get('/', (request, response) => {
@@ -43,4 +47,10 @@ export default function routes(app) {
 
   // update a request's status
   app.put('/requests/:id/status', checkAuth, RequestsController.updateStatus);
+
+  // get a list of countries
+  app.get('/countries', CountriesController.index);
+
+  // get a list of categories
+  app.get('/categories', CategoriesController.index);
 }

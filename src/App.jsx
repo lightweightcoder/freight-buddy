@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 // import components
@@ -20,6 +20,8 @@ export default function App() {
   const [page, setPage] = useState(pages.HOME);
   const [user, setUser] = useState(null);
   const [selectedRequest, setSelectedRequest] = useState(null);
+  const [countriesList, setCountriesList] = useState(null);
+  const [categoriesList, setCategoriesList] = useState(null);
 
   // get the details of the selected request, then set the state of the page to
   // to display the request details
@@ -78,13 +80,40 @@ export default function App() {
       });
   };
 
+  // get a list of countries when App is rendered
+  useEffect(() => {
+    axios.get('/countries')
+      .then((result) => {
+        console.log(result);
+
+        // set the countries
+        setCountriesList(result.data.countriesList);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a list of countries error', error);
+      });
+
+    axios.get('/categories')
+      .then((result) => {
+        console.log(result);
+
+        // set the countries
+        setCategoriesList(result.data.categoriesList);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a list of categories error', error);
+      });
+  }, []);
+
   return (
     <div>
       <AppErrorBoundary>
         <TopNavbar user={user} setPage={setPage} />
         {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
-        {(page === pages.CREATE_REQUEST) ? <CreateRequestPage /> : ''}
+        {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} /> : ''}
       </AppErrorBoundary>
     </div>
   );

@@ -67,6 +67,11 @@ body {
   margin-top: 25px;
 }
 
+/* for CreateRequestPage component */
+#new-request-form-heading {
+  text-align: center;
+}
+
 /* for bootstrap col-sm */
 @media (min-width: 576px) {
   /* for RequestCard component */
