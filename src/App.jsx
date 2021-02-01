@@ -68,6 +68,11 @@ export default function App() {
       .catch((error) => {
         // handle error
         console.log('get a request details error', error);
+
+        // redirect user to login page as user tried to access a forbidden page
+        if (error.message === 'Request failed with status code 403') {
+          window.location.assign('/login');
+        }
       });
   };
 

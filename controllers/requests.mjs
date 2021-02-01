@@ -74,6 +74,14 @@ export default function requests(db) {
       // new status to be updated to
       const { newStatus } = req.body;
 
+      // if there is no logged in user, send a 403 request forbidden response
+      if (user === null) {
+        console.log('inside forbidden response');
+        res.sendStatus(403);
+        // return so code below will not run
+        return;
+      }
+
       // perform the DB update depending on the request's new status
       if (newStatus === 'accepted' || newStatus === 'shipped') {
         // if new status is accepted, update status and the user id of the helper
