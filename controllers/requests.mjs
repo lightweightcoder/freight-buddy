@@ -77,10 +77,24 @@ export default function requests(db) {
       // perform the DB update depending on the request's new status
       if (newStatus === 'accepted' || newStatus === 'shipped') {
         // if new status is accepted, update status and the user id of the helper
-        const hi = await db.Request.update(
+        await db.Request.update(
           {
             status: newStatus,
             helperId: user.id,
+          },
+          {
+            where: {
+              id: requestId,
+            },
+          },
+        );
+      } else if (newStatus === 'requested') {
+        // this means that a helper clicked on the withdraw help button
+        // remove the helper id from the DB and change status to requested
+        await db.Request.update(
+          {
+            status: newStatus,
+            helperId: null,
           },
           {
             where: {

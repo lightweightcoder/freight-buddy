@@ -50,6 +50,10 @@ export default function App() {
       newStatus = 'accepted';
     } else if (buttonText === 'sent for shipping') {
       newStatus = 'shipped';
+    } else if (buttonText === 'withdraw help') {
+      // this occurs when a helper clicks on the withdraw help button
+      // new status of request is requested so other potential helper can accept the request
+      newStatus = 'requested';
     }
 
     // make axios request to change the status in the DB

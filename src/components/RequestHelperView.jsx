@@ -41,6 +41,9 @@ export default function RequestHelperView({ selectedRequest, changeSelectedReque
   const prevIcon = <span aria-hidden="true" className="fas fa-angle-left fa-2x" />;
 
   // create a button to allow the helper to cancel his/her help
+  const CancelHelpButton = (
+    <button type="button" className="btn btn-danger" onClick={() => changeSelectedRequestStatus('withdraw help')}>withdraw help</button>
+  );
 
   return (
     <div className="container">
@@ -96,6 +99,8 @@ export default function RequestHelperView({ selectedRequest, changeSelectedReque
         <div className="col-12">
           <p><small>actions available:</small></p>
           <RequestHelperViewButton status={selectedRequest.status} changeSelectedRequestStatus={changeSelectedRequestStatus} />
+          <br />
+          {(selectedRequest.status === 'accepted') ? CancelHelpButton : <div />}
         </div>
       </div>
     </div>
