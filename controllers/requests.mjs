@@ -45,6 +45,7 @@ export default function requests(db) {
           db.Country,
           db.ProductPhoto,
           { model: db.User, as: 'requester' },
+          { model: db.User, as: 'helper' },
         ],
       });
 
@@ -120,6 +121,7 @@ export default function requests(db) {
           db.Country,
           db.ProductPhoto,
           { model: db.User, as: 'requester' },
+          { model: db.User, as: 'helper' },
         ],
       });
 
