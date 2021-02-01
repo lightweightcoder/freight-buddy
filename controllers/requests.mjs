@@ -57,5 +57,59 @@ export default function requests(db) {
     }
   };
 
-  return { index, show };
+  const updateStatus = async (req, res) => {
+    console.log('request to update the status of a request ');
+
+    // set object to store data to be sent to response
+    const data = {};
+
+    try {
+      // store the user's data (or null if no user is logged in) gotten from the
+      // previous middleware, checkAuth
+      const { user } = req;
+
+      // request id
+      const requestId = req.params.id;
+
+      // new status to be updated to
+      const { newStatus } = req.body;
+
+      // perform the DB update depending on the request's new status
+      if (newStatus === 'accepted') {
+        // if new status is accepted, update status and the user id of the helper
+        await db.Request.update(
+          {
+            status: newStatus,
+            helperId: user.id,
+          },
+          {
+            where: {
+              id: requestId,
+            },
+          },
+        );
+      }
+
+      const updatedRequest = await db.Request.findOne({
+        where: {
+          id: requestId,
+        },
+        include: [
+          db.Country,
+          db.ProductPhoto,
+          { model: db.User, as: 'requester' },
+        ],
+      });
+
+      data.updatedRequest = updatedRequest;
+
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
+  return { index, show, updateStatus };
 }

@@ -42,7 +42,7 @@ export default function users(db) {
         res.cookie('loggedInHash', loggedInHash);
 
         // redirect to home page
-        res.redirect('/home');
+        res.redirect('/');
       }
     } catch (error) {
       console.log(error);
@@ -101,7 +101,7 @@ export default function users(db) {
       res.cookie('loggedInHash', loggedInHash);
 
       // redirect to home route
-      res.redirect('/home');
+      res.redirect('/');
     } catch (error) {
       if (error instanceof UniqueConstraintError) {
         // email is not unique

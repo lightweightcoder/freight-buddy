@@ -1,13 +1,13 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 // import CarouselItems from './CarouselItems.jsx';
 import RequestHelperViewButton from './RequestHelperViewButton.jsx';
 
-export default function RequestHelperView({ selectedRequest }) {
+export default function RequestHelperView({ selectedRequest, changeSelectedRequestStatus }) {
   // variable to store JSX of the carousel items
   let carouselItems = '';
-  // const [buttonText, setButtonText] = useState('');
 
   if (selectedRequest === null) {
     return <div />;
@@ -94,7 +94,8 @@ export default function RequestHelperView({ selectedRequest }) {
       </div>
       <div className="row">
         <div className="col-12">
-          <RequestHelperViewButton status={selectedRequest.status} />
+          <p><small>actions available:</small></p>
+          <RequestHelperViewButton status={selectedRequest.status} changeSelectedRequestStatus={changeSelectedRequestStatus} />
         </div>
       </div>
     </div>

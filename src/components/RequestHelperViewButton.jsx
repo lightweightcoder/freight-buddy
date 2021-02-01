@@ -2,7 +2,7 @@
 import React from 'react';
 import getButtonText from '../../utilities/get-button-text.mjs';
 
-export default function RequestHelperViewButton({ status }) {
+export default function RequestHelperViewButton({ status, changeSelectedRequestStatus }) {
   // get the button text that represents the next available action that a helper can do
   // return empty string if status is not requested or accepted as
   // the helper has no further action to take
@@ -15,6 +15,6 @@ export default function RequestHelperViewButton({ status }) {
   }
 
   return (
-    <button type="button" className="btn btn-primary">{buttonText}</button>
+    <button type="button" className="btn btn-primary" onClick={() => changeSelectedRequestStatus(buttonText)}>{buttonText}</button>
   );
 }

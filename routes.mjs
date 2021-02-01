@@ -40,4 +40,7 @@ export default function routes(app) {
 
   // get a request's details
   app.get('/requests/:id', checkAuth, RequestsController.show);
+
+  // update a request's status
+  app.put('/requests/:id/status', checkAuth, RequestsController.updateStatus);
 }

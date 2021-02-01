@@ -29,17 +29,48 @@ export default function App() {
 
         // set the request's details
         setSelectedRequest(result.data.request);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a request details error', error);
       });
 
     // set the page to view the selected request's details
     setPage(pages.SHOW_REQUEST_HELPER_VIEW);
   };
 
+  // change the status of the selected request in the DB and state variable
+  // change is made based on the button text of the button that triggered this function
+  const changeSelectedRequestStatus = (buttonText) => {
+    // the new status of the request to be updated
+    let newStatus;
+
+    // determine the new status
+    if (buttonText === 'offer help') {
+      newStatus = 'accepted';
+    } else if (buttonText === 'sent for shipping') {
+      newStatus = 'shipped';
+    }
+
+    // make axios request to change the status in the DB
+    axios.put(`/requests/${selectedRequest.id}/status`, { newStatus })
+      .then((result) => {
+        console.log('request/:id/status result is', result);
+
+        // set the request's details
+        setSelectedRequest(result.data.updatedRequest);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a request details error', error);
+      });
+  };
+
   return (
     <div>
       <TopNavbar user={user} setPage={setPage} />
       {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
-      {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView selectedRequest={selectedRequest} /> : '')}
+      {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : '')}
     </div>
   );
 }
