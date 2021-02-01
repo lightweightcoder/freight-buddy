@@ -75,9 +75,9 @@ export default function requests(db) {
       const { newStatus } = req.body;
 
       // perform the DB update depending on the request's new status
-      if (newStatus === 'accepted') {
+      if (newStatus === 'accepted' || newStatus === 'shipped') {
         // if new status is accepted, update status and the user id of the helper
-        await db.Request.update(
+        const hi = await db.Request.update(
           {
             status: newStatus,
             helperId: user.id,

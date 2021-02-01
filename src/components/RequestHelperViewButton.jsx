@@ -14,6 +14,14 @@ export default function RequestHelperViewButton({ status, changeSelectedRequestS
     );
   }
 
+  // if the button text is received product it means that the helper is waiting for the
+  // requester to confirm the delivery of the product
+  if (buttonText === 'received product') {
+    return (
+      <button type="button" className="btn btn-secondary" disabled>waiting for requester to confirm delivery</button>
+    );
+  }
+
   return (
     <button type="button" className="btn btn-primary" onClick={() => changeSelectedRequestStatus(buttonText)}>{buttonText}</button>
   );

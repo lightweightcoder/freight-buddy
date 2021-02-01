@@ -12,5 +12,9 @@ export default function getButtonText(status) {
     return 'sent for shipping';
   }
 
+  if (status === 'shipped') {
+    return 'received product';
+  }
+
   return '';
 }
