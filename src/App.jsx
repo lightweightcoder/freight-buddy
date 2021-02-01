@@ -7,11 +7,13 @@ import AppErrorBoundary from './components/AppErrorBoundary.jsx';
 import TopNavbar from './components/TopNavbar.jsx';
 import HomePage from './components/HomePage.jsx';
 import RequestHelperView from './components/RequestHelperView.jsx';
+import CreateRequestPage from './components/CreateRequestPage.jsx';
 
 // states to determine which components to load
 const pages = {
   HOME: 'HOME',
   SHOW_REQUEST_HELPER_VIEW: 'SHOW_REQUEST_HELPER_VIEW',
+  CREATE_REQUEST: 'CREATE_REQUEST',
 };
 
 export default function App() {
@@ -81,7 +83,8 @@ export default function App() {
       <AppErrorBoundary>
         <TopNavbar user={user} setPage={setPage} />
         {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
-        {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : '')}
+        {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
+        {(page === pages.CREATE_REQUEST) ? <CreateRequestPage /> : ''}
       </AppErrorBoundary>
     </div>
   );
