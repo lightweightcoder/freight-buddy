@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 // import components
+import AppErrorBoundary from './components/AppErrorBoundary.jsx';
 import TopNavbar from './components/TopNavbar.jsx';
 import HomePage from './components/HomePage.jsx';
 import RequestHelperView from './components/RequestHelperView.jsx';
@@ -72,9 +73,11 @@ export default function App() {
 
   return (
     <div>
-      <TopNavbar user={user} setPage={setPage} />
-      {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
-      {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : '')}
+      <AppErrorBoundary>
+        <TopNavbar user={user} setPage={setPage} />
+        {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
+        {(page === pages.SHOW_REQUEST_HELPER_VIEW ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : '')}
+      </AppErrorBoundary>
     </div>
   );
 }
