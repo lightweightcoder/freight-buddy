@@ -17,6 +17,10 @@ export default function HomePage({ setUser, selectAndViewARequestPageHelper }) {
         setRequests(result.data.requestsList);
         // set the user
         setUser(result.data.user);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a list of available requests error', error);
       });
   }, []);
 
