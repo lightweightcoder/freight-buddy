@@ -6,7 +6,11 @@ export default function countries(db) {
     const data = {};
 
     try {
-      const countriesList = await db.Country.findAll();
+      const countriesList = await db.Country.findAll({
+        order: [
+          ['id', 'ASC'],
+        ],
+      });
 
       data.countriesList = countriesList;
       res.send(data);

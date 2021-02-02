@@ -25,6 +25,8 @@ function getHash(input) {
 const countriesList = [];
 const countriesNames = getNames();
 
+countriesNames.sort();
+
 for (let i = 0; i < countriesNames.length; i += 1) {
   countriesList.push({
     name: countriesNames[i],
