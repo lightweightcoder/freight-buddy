@@ -3,6 +3,7 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 // import CarouselItems from './CarouselItems.jsx';
+import moment from 'moment';
 import RequestHelperViewButton from './RequestHelperViewButton.jsx';
 
 export default function RequestHelperView({ selectedRequest, changeSelectedRequestStatus }) {
@@ -52,7 +53,7 @@ export default function RequestHelperView({ selectedRequest, changeSelectedReque
         <div className="col-12 product-name">
           <h4>{selectedRequest.productName}</h4>
           <p id="request-id">{`Request id: ${selectedRequest.id}`}</p>
-          <p id="created-at">{`created on: ${selectedRequest.createdAt}`}</p>
+          <p id="created-at">{`created on: ${moment(selectedRequest.createdAt).format('DD MMM YYYY')}`}</p>
         </div>
       </div>
       <div className="row">
