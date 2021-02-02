@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
+import multer from 'multer';
 import webpackConfig from './webpack_conf/webpack.dev.js';
 import bindRoutes from './routes.mjs';
 

@@ -56,6 +56,7 @@
     "express": "^4.17.1",
     "jssha": "^3.2.0",
     "method-override": "^3.0.0",
+    "multer": "^1.4.2",
     "pg": "^8.5.1",
     "react-bootstrap": "^1.4.3",
     "react-multi-carousel": "^2.6.1",
