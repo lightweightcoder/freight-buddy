@@ -61,6 +61,9 @@ export default function App() {
       // this occurs when a helper clicks on the withdraw help button
       // new status of request is requested so other potential helper can accept the request
       newStatus = 'requested';
+    } else if (buttonText === 'cancel request') {
+      // occurs when a requester clicks on the cancel request button
+      newStatus = 'cancelled';
     }
 
     // make axios request to change the status in the DB
@@ -141,7 +144,7 @@ export default function App() {
         {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
-        {(page === pages.SHOW_REQUEST_REQUESTER_VIEW) ? <RequestRequesterView selectedRequest={selectedRequest} /> : ''}
+        {(page === pages.SHOW_REQUEST_REQUESTER_VIEW) ? <RequestRequesterView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
       </AppErrorBoundary>
     </div>
   );

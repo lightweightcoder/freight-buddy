@@ -114,6 +114,20 @@ export default function requests(db) {
             },
           },
         );
+      } else if (newStatus === 'cancelled') {
+        // this means that a requester clicked on the cancel request button
+        // remove the helper id from the DB and change status to cancelled
+        await db.Request.update(
+          {
+            status: newStatus,
+            helperId: null,
+          },
+          {
+            where: {
+              id: requestId,
+            },
+          },
+        );
       }
 
       const updatedRequest = await db.Request.findOne({
