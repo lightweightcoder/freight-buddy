@@ -18,6 +18,9 @@ export default function requests(db) {
           db.Country,
           db.ProductPhoto,
         ],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
       });
 
       data.requestsList = requestsList;
@@ -157,7 +160,19 @@ export default function requests(db) {
         return;
       }
 
-      const createdRequest = await db.Request.create(request);
+      const newRequest = await db.Request.create(request);
+
+      const createdRequest = await db.Request.findOne({
+        where: {
+          id: newRequest.id,
+        },
+        include: [
+          db.Country,
+          db.ProductPhoto,
+          { model: db.User, as: 'requester' },
+          { model: db.User, as: 'helper' },
+        ],
+      });
 
       data.createdRequest = createdRequest;
       res.send(data);

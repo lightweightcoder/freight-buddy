@@ -8,12 +8,14 @@ import TopNavbar from './components/TopNavbar.jsx';
 import HomePage from './components/HomePage.jsx';
 import RequestHelperView from './components/RequestHelperView.jsx';
 import CreateRequestPage from './components/CreateRequestPage.jsx';
+import RequestRequesterView from './components/RequestRequesterView.jsx';
 
 // states to determine which components to load
 const pages = {
   HOME: 'HOME',
   SHOW_REQUEST_HELPER_VIEW: 'SHOW_REQUEST_HELPER_VIEW',
   CREATE_REQUEST: 'CREATE_REQUEST',
+  SHOW_REQUEST_REQUESTER_VIEW: 'SHOW_REQUEST_REQUESTER_VIEW',
 };
 
 export default function App() {
@@ -89,7 +91,7 @@ export default function App() {
         console.log('new request result is', result);
 
         // set the request's details
-        // setSelectedRequest(result.data.request);
+        setSelectedRequest(result.data.createdRequest);
       })
       .catch((error) => {
         // handle error
@@ -100,6 +102,9 @@ export default function App() {
           window.location.assign('/login');
         }
       });
+
+    // set the page to view the selected request's details to the requester
+    setPage(pages.SHOW_REQUEST_REQUESTER_VIEW);
   };
 
   // get a list of countries when App is rendered
@@ -136,6 +141,7 @@ export default function App() {
         {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
+        {(page === pages.SHOW_REQUEST_REQUESTER_VIEW) ? <RequestRequesterView selectedRequest={selectedRequest} /> : ''}
       </AppErrorBoundary>
     </div>
   );
