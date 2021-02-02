@@ -135,5 +135,41 @@ export default function requests(db) {
     }
   };
 
-  return { index, show, updateStatus };
+  const create = async (req, res) => {
+    console.log('request to create a delivery request');
+
+    // set object to store data to be sent to response
+    const data = {};
+
+    try {
+      // store the user's data (or null if no user is logged in) gotten from the
+      // previous middleware, checkAuth
+      const { user } = req;
+
+      // get the delivery request to be created from request body
+      const request = req.body;
+      console.log('request is', request);
+
+      // if there is no logged in user, send a 403 request forbidden response
+      if (user === null) {
+        console.log('inside forbidden response');
+        res.sendStatus(403);
+        // return so code below will not run
+        return;
+      }
+
+      const createdRequest = await db.Request.create(request);
+
+      data.createdRequest = createdRequest;
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
+  return {
+    index, show, updateStatus, create,
+  };
 }

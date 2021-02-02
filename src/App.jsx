@@ -24,7 +24,7 @@ export default function App() {
   const [categoriesList, setCategoriesList] = useState(null);
 
   // get the details of the selected request, then set the state of the page to
-  // to display the request details
+  // to display the request details to the helper
   // this occurs when a potential helper clicks on a request at the homepage
   const selectAndViewARequestPageHelper = (id) => {
     // get the request's details from the DB and set it in selectedRequest variable
@@ -80,6 +80,28 @@ export default function App() {
       });
   };
 
+  // create a request in the DB, set that request as the selected request
+  // and set the page state variable to display the request details to the requester
+  const createRequestAndSetRequestDetailsPage = (request) => {
+    // post a request to create the new request
+    axios.post('/requests', request)
+      .then((result) => {
+        console.log('new request result is', result);
+
+        // set the request's details
+        // setSelectedRequest(result.data.request);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('create a request error', error);
+
+        // redirect user to login page as user tried to access a forbidden page
+        if (error.message === 'Request failed with status code 403') {
+          window.location.assign('/login');
+        }
+      });
+  };
+
   // get a list of countries when App is rendered
   useEffect(() => {
     axios.get('/countries')
@@ -113,7 +135,7 @@ export default function App() {
         <TopNavbar user={user} setPage={setPage} />
         {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
-        {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} /> : ''}
+        {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
       </AppErrorBoundary>
     </div>
   );

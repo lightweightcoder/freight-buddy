@@ -1,4 +1,5 @@
 import { resolve } from 'path';
+import multer from 'multer';
 import db from './models/index.mjs';
 
 // import checkAuth middleware
@@ -17,6 +18,10 @@ export default function routes(app) {
   const RequestsController = requests(db);
   const CountriesController = countries(db);
   const CategoriesController = categories(db);
+
+  // multer settings ------------------------
+  // set the name of the upload directory here for multer
+  const multerUpload = multer({ dest: 'uploads/product-photos' });
 
   // special JS page. Include the webpack index.html file
   app.get('/', (request, response) => {
@@ -53,4 +58,8 @@ export default function routes(app) {
 
   // get a list of categories
   app.get('/categories', CategoriesController.index);
+
+  // accept request to create a request
+  // app.post('/requests', checkAuth, multerUpload.single('photo'));
+  app.post('/requests', checkAuth, RequestsController.create);
 }

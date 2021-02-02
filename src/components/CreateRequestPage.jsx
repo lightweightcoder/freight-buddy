@@ -2,7 +2,9 @@
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 
-export default function CreateRequestPage({ user, countriesList, categoriesList }) {
+export default function CreateRequestPage({
+  user, countriesList, categoriesList, createRequestAndSetRequestDetailsPage,
+}) {
   // to store the request to be added to DB
   const [request, setRequest] = useState({
     productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1,
@@ -10,12 +12,12 @@ export default function CreateRequestPage({ user, countriesList, categoriesList 
 
   // create JSX for country options elements for form
   const countryOptionElements = countriesList.map((country) => (
-    <option value={country.id}>{country.name}</option>
+    <option key={country.id} value={country.id}>{country.name}</option>
   ));
 
   // create JSX for category options elements for form
   const categoryOptionElements = categoriesList.map((category) => (
-    <option value={category.id}>{category.name}</option>
+    <option key={category.id} value={category.id}>{category.name}</option>
   ));
 
   // handlers for every form input
@@ -38,12 +40,13 @@ export default function CreateRequestPage({ user, countriesList, categoriesList 
 
     if (inputPrice) {
       // remove any zeros at the front
-      const filteredPrice = inputPrice.toString().match(/[1-9.]+/);
+      const filteredPrice = inputPrice.toString().match(/[1-9.][0-9.]*/);
       console.log('filtered price is', filteredPrice);
 
       if (filteredPrice !== null) {
         // convert the price to 2 decimal places (rounded down)
         updatedPrice = Math.floor(Number(filteredPrice[0]) * 100) / 100;
+        console.log('updated price is', updatedPrice);
       } else {
         updatedPrice = '';
       }
@@ -130,8 +133,13 @@ export default function CreateRequestPage({ user, countriesList, categoriesList 
                 <Form.Label>Shipping Address</Form.Label>
                 <Form.Control type="text" value={request.shippingAddress} onChange={handleShippingAddressChange} />
               </Form.Group>
+              {/* <Form.Group>
+                <Form.Label>Product photos (up to 3)</Form.Label>
+                <br />
+                <input type="file" name="photo" />
+              </Form.Group> */}
 
-              <button type="button" className="btn btn-primary">Create Request</button>
+              <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>
             </Form>
           </div>
         </div>
