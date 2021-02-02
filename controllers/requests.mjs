@@ -148,7 +148,6 @@ export default function requests(db) {
 
       // get the delivery request to be created from request body
       const request = req.body;
-      console.log('request is', request);
 
       // if there is no logged in user, send a 403 request forbidden response
       if (user === null) {

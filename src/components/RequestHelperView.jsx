@@ -51,7 +51,8 @@ export default function RequestHelperView({ selectedRequest, changeSelectedReque
         { /* product name and request id */ }
         <div className="col-12 product-name">
           <h4>{selectedRequest.productName}</h4>
-          <p><small>{`Request id: ${selectedRequest.id}`}</small></p>
+          <p id="request-id">{`Request id: ${selectedRequest.id}`}</p>
+          <p id="created-at">{`created on: ${selectedRequest.createdAt}`}</p>
         </div>
       </div>
       <div className="row">

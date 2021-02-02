@@ -67,6 +67,16 @@ body {
   margin-top: 25px;
 }
 
+#request-id {
+  font-size: small;
+  margin-bottom: 0;
+}
+
+#created-at {
+  font-size: x-small;
+  margin-bottom: 0;
+}
+
 /* for CreateRequestPage component */
 #new-request-form-heading {
   text-align: center;
