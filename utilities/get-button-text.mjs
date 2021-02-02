@@ -13,7 +13,7 @@ export default function getButtonText(status) {
   }
 
   if (status === 'shipped') {
-    return 'received product';
+    return 'waiting for requester to confirm delivery';
   }
 
   return '';

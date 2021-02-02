@@ -47,25 +47,7 @@ export default function App() {
   };
 
   // change the status of the selected request in the DB and state variable
-  // change is made based on the button text of the button that triggered this function
-  const changeSelectedRequestStatus = (buttonText) => {
-    // the new status of the request to be updated
-    let newStatus;
-
-    // determine the new status
-    if (buttonText === 'offer help') {
-      newStatus = 'accepted';
-    } else if (buttonText === 'sent for shipping') {
-      newStatus = 'shipped';
-    } else if (buttonText === 'withdraw help') {
-      // this occurs when a helper clicks on the withdraw help button
-      // new status of request is requested so other potential helper can accept the request
-      newStatus = 'requested';
-    } else if (buttonText === 'cancel request') {
-      // occurs when a requester clicks on the cancel request button
-      newStatus = 'cancelled';
-    }
-
+  const changeSelectedRequestStatus = (newStatus) => {
     // make axios request to change the status in the DB
     axios.put(`/requests/${selectedRequest.id}/status`, { newStatus })
       .then((result) => {

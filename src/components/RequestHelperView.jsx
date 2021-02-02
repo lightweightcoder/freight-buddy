@@ -12,7 +12,7 @@ export default function RequestHelperView({ selectedRequest, changeSelectedReque
 
   // create a button to allow the helper to cancel his/her help
   const CancelHelpButton = (
-    <button type="button" className="btn btn-danger" onClick={() => changeSelectedRequestStatus('withdraw help')}>withdraw help</button>
+    <button type="button" className="btn btn-danger" onClick={() => changeSelectedRequestStatus('requested')}>withdraw help</button>
   );
 
   return (

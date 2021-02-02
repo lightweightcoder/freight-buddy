@@ -23,7 +23,9 @@ export default function RequestRequesterViewButton({ status, changeSelectedReque
   }
 
   // reaches here if request status is 'shipped'.
+  // if requester clicks button, it means that requester has confirmed the delivery
+  // so change request status to complete
   return (
-    <button type="button" className="btn btn-primary" onClick={() => changeSelectedRequestStatus(buttonText)}>{buttonText}</button>
+    <button type="button" className="btn btn-primary" onClick={() => changeSelectedRequestStatus('completed')}>{buttonText}</button>
   );
 }
