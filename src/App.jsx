@@ -37,7 +37,20 @@ export default function App() {
 
   // handle to set the state of the page to display a list of requests made by the user
   const handleSetViewRequestsPage = () => {
-    setPage('VIEW_REQUESTS');
+    // get the user's delivery requests from the DB and set it in userRequests state variable
+    axios.get('users/requests')
+      .then((result) => {
+        console.log('user requests result is', result);
+
+        // // set the request's details
+        // setSelectedRequest(result.data.request);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a user\'s requests error', error);
+      });
+
+    setPage(pages.VIEW_REQUESTS);
   };
 
   // get the details of the selected request, then set the state of the page to

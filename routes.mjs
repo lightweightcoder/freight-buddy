@@ -62,4 +62,7 @@ export default function routes(app) {
   // accept request to create a request
   // app.post('/requests', checkAuth, multerUpload.single('photo'));
   app.post('/requests', checkAuth, RequestsController.create);
+
+  // get a list of requests made by the user
+  app.get('/users/requests', checkAuth, UsersController.requests);
 }

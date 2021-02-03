@@ -138,5 +138,43 @@ export default function users(db) {
     }
   };
 
-  return { login, getRegistrationPage, register };
+  const requests = async (req, res) => {
+    console.log('get request for user delivery requests came in');
+
+    // set object to store data to be sent to response
+    const data = {};
+
+    // store the user's data (or null if no user is logged in) gotten from the
+    // previous middleware, checkAuth
+    const { user } = req;
+
+    try {
+      const requestsList = await db.Request.findAll({
+        where: {
+          requesterId: user.id,
+        },
+        include: [
+          db.Country,
+          db.ProductPhoto,
+          { model: db.User, as: 'requester' },
+          { model: db.User, as: 'helper' },
+          db.Category,
+        ],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      });
+
+      data.requestsList = requestsList;
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
+  return {
+    login, getRegistrationPage, register, requests,
+  };
 }
