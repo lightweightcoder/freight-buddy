@@ -9,6 +9,7 @@ import HomePage from './components/HomePage.jsx';
 import RequestHelperView from './components/RequestHelperView.jsx';
 import CreateRequestPage from './components/CreateRequestPage.jsx';
 import RequestRequesterView from './components/RequestRequesterView.jsx';
+import RequestsPage from './components/RequestsPage.jsx';
 
 // states to determine which components to load
 const pages = {
@@ -16,6 +17,7 @@ const pages = {
   SHOW_REQUEST_HELPER_VIEW: 'SHOW_REQUEST_HELPER_VIEW',
   CREATE_REQUEST: 'CREATE_REQUEST',
   SHOW_REQUEST_REQUESTER_VIEW: 'SHOW_REQUEST_REQUESTER_VIEW',
+  VIEW_REQUESTS: 'VIEW_REQUESTS',
 };
 
 export default function App() {
@@ -24,6 +26,19 @@ export default function App() {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [countriesList, setCountriesList] = useState(null);
   const [categoriesList, setCategoriesList] = useState(null);
+  const [availableRequests, setAvailableRequests] = useState(null);
+  const [userRequests, setUserRequests] = useState(null);
+
+  // handle to set the state of the page to display a form to create a request
+  // this occurs when a user clicks on the create request link in the navbar
+  const handleSetCreateRequestPage = () => {
+    setPage('CREATE_REQUEST');
+  };
+
+  // handle to set the state of the page to display a list of requests made by the user
+  const handleSetViewRequestsPage = () => {
+    setPage('VIEW_REQUESTS');
+  };
 
   // get the details of the selected request, then set the state of the page to
   // to display the request details to the helper
@@ -92,8 +107,22 @@ export default function App() {
     setPage(pages.SHOW_REQUEST_REQUESTER_VIEW);
   };
 
-  // get a list of countries when App is rendered
+  // get a list of available requests, countries and categories when App is rendered
   useEffect(() => {
+    axios.get('/requests')
+      .then((result) => {
+        console.log(result);
+
+        // set the available requests
+        setAvailableRequests(result.data.requestsList);
+        // set the user
+        setUser(result.data.user);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a list of available requests error', error);
+      });
+
     axios.get('/countries')
       .then((result) => {
         console.log(result);
@@ -122,11 +151,12 @@ export default function App() {
   return (
     <div>
       <AppErrorBoundary>
-        <TopNavbar user={user} setPage={setPage} />
-        {(page === pages.HOME) ? <HomePage setUser={setUser} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
+        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} />
+        {(page === pages.HOME) ? <HomePage selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} availableRequests={availableRequests} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
         {(page === pages.SHOW_REQUEST_REQUESTER_VIEW) ? <RequestRequesterView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
+        {(page === pages.VIEW_REQUESTS) ? <RequestsPage userRequests={userRequests} /> : ''}
       </AppErrorBoundary>
     </div>
   );

@@ -1,14 +1,9 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-export default function TopNavbar({ user, setPage }) {
-  // handle to set the state of the page to display a form to create a request
-  // this occurs when a user clicks on the create request link in the navbar
-  const handleSetCreateRequestPage = () => {
-    setPage('CREATE_REQUEST');
-  };
-
+export default function TopNavbar({ user, handleSetCreateRequestPage, handleSetViewRequestsPage }) {
   const loggedInNavbar = (
     <Navbar collapseOnSelect expand="md" bg="light" variant="light" className="top-navbar">
       <Navbar.Brand href="/">
@@ -23,9 +18,9 @@ export default function TopNavbar({ user, setPage }) {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav id="items">
-          <Nav.Link href="#Requests">Requests</Nav.Link>
+          <Nav.Link href="#Requests" onClick={handleSetViewRequestsPage}>Requests</Nav.Link>
           <Nav.Link href="#Favours">Favours</Nav.Link>
-          <Nav.Link href="#" onClick={handleSetCreateRequestPage}>Create Request</Nav.Link>
+          <Nav.Link href="#Create" onClick={handleSetCreateRequestPage}>Create Request</Nav.Link>
           <Nav.Link href="#Profile">Profile</Nav.Link>
           <Nav.Link href="#Logout">Logout</Nav.Link>
         </Nav>
