@@ -151,7 +151,7 @@ export default function users(db) {
     try {
       // object containing requests, where each key is the status of the delivery request
       // and value is an array of requests corresponding to that status
-      const requests = {
+      const requestsObject = {
         requested: [],
         accepted: [],
         shipped: [],
@@ -180,19 +180,82 @@ export default function users(db) {
       for (let i = 0; i < requestsList.length; i += 1) {
         const { status } = requestsList[i];
         if (status === 'requested') {
-          requests.requested.push(requestsList[i]);
+          requestsObject.requested.push(requestsList[i]);
         } else if (status === 'accepted') {
-          requests.accepted.push(requestsList[i]);
+          requestsObject.accepted.push(requestsList[i]);
         } else if (status === 'shipped') {
-          requests.shipped.push(requestsList[i]);
+          requestsObject.shipped.push(requestsList[i]);
         } else if (status === 'completed') {
-          requests.completed.push(requestsList[i]);
+          requestsObject.completed.push(requestsList[i]);
         } else if (status === 'cancelled') {
-          requests.cancelled.push(requestsList[i]);
+          requestsObject.cancelled.push(requestsList[i]);
         }
       }
 
-      data.requests = requests;
+      data.requestsObject = requestsObject;
+      res.send(data);
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
+  const favours = async (req, res) => {
+    console.log('get request for user favours came in');
+
+    // set object to store data to be sent to response
+    const data = {};
+
+    // store the user's data (or null if no user is logged in) gotten from the
+    // previous middleware, checkAuth
+    const { user } = req;
+
+    try {
+      // object containing favours, where each key is the status of the favour
+      // and value is an array of favours corresponding to that status
+      const favoursObject = {
+        requested: [],
+        accepted: [],
+        shipped: [],
+        completed: [],
+        cancelled: [],
+      };
+
+      // find all requests belonging to that user
+      const favoursList = await db.Request.findAll({
+        where: {
+          helperId: user.id,
+        },
+        include: [
+          db.Country,
+          db.ProductPhoto,
+          { model: db.User, as: 'requester' },
+          { model: db.User, as: 'helper' },
+          db.Category,
+        ],
+        order: [
+          ['createdAt', 'DESC'],
+        ],
+      });
+
+      // store the requests in the requests object depending on the status of the request
+      for (let i = 0; i < favoursList.length; i += 1) {
+        const { status } = favoursList[i];
+        if (status === 'requested') {
+          favoursObject.requested.push(favoursList[i]);
+        } else if (status === 'accepted') {
+          favoursObject.accepted.push(favoursList[i]);
+        } else if (status === 'shipped') {
+          favoursObject.shipped.push(favoursList[i]);
+        } else if (status === 'completed') {
+          favoursObject.completed.push(favoursList[i]);
+        } else if (status === 'cancelled') {
+          favoursObject.cancelled.push(favoursList[i]);
+        }
+      }
+
+      data.favoursObject = favoursObject;
       res.send(data);
     } catch (error) {
       console.log(error);
@@ -202,6 +265,6 @@ export default function users(db) {
   };
 
   return {
-    login, getRegistrationPage, register, requests,
+    login, getRegistrationPage, register, requests, favours,
   };
 }

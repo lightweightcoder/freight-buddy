@@ -10,6 +10,7 @@ import RequestHelperView from './components/RequestHelperView.jsx';
 import CreateRequestPage from './components/CreateRequestPage.jsx';
 import RequestRequesterView from './components/RequestRequesterView.jsx';
 import RequestsPage from './components/RequestsPage.jsx';
+import FavoursPage from './components/FavoursPage.jsx';
 
 // states to determine which components to load
 const pages = {
@@ -18,6 +19,7 @@ const pages = {
   CREATE_REQUEST: 'CREATE_REQUEST',
   SHOW_REQUEST_REQUESTER_VIEW: 'SHOW_REQUEST_REQUESTER_VIEW',
   VIEW_REQUESTS: 'VIEW_REQUESTS',
+  VIEW_FAVOURS: 'VIEW_FAVOURS',
 };
 
 export default function App() {
@@ -28,6 +30,7 @@ export default function App() {
   const [categoriesList, setCategoriesList] = useState(null);
   const [availableRequests, setAvailableRequests] = useState(null);
   const [userRequests, setUserRequests] = useState(null);
+  const [userFavours, setUserFavours] = useState(null);
 
   // handle to set the state of the page to display a form to create a request
   // this occurs when a user clicks on the create request link in the navbar
@@ -43,13 +46,32 @@ export default function App() {
         console.log('user requests result is', result);
 
         // set the user's requests details
-        setUserRequests(result.data.requests);
+        setUserRequests(result.data.requestsObject);
 
         setPage(pages.VIEW_REQUESTS);
       })
       .catch((error) => {
         // handle error
         console.log('get a user\'s requests error', error);
+      });
+  };
+
+  // handle to set the state of the page to display a list of favours made by the user
+  // favours are the requests (of others) that the user has offered help to
+  const handleSetViewFavoursPage = () => {
+    // get the user's favours from the DB and set it in userFavours state variable
+    axios.get('users/favours')
+      .then((result) => {
+        console.log('user favours result is', result);
+
+        // set the user's favours details
+        setUserFavours(result.data.favoursObject);
+
+        setPage(pages.VIEW_FAVOURS);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a user\'s favours error', error);
       });
   };
 
@@ -185,12 +207,13 @@ export default function App() {
   return (
     <div>
       <AppErrorBoundary>
-        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} />
+        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} handleSetViewFavoursPage={handleSetViewFavoursPage} />
         {(page === pages.HOME) ? <HomePage selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} availableRequests={availableRequests} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
         {(page === pages.SHOW_REQUEST_REQUESTER_VIEW) ? <RequestRequesterView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.VIEW_REQUESTS) ? <RequestsPage userRequests={userRequests} selectAndViewARequestPageRequester={selectAndViewARequestPageRequester} /> : ''}
+        {(page === pages.VIEW_FAVOURS) ? <FavoursPage userFavours={userFavours} selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} /> : ''}
       </AppErrorBoundary>
     </div>
   );

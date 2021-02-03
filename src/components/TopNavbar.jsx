@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
-export default function TopNavbar({ user, handleSetCreateRequestPage, handleSetViewRequestsPage }) {
+export default function TopNavbar({
+  user, handleSetCreateRequestPage, handleSetViewRequestsPage, handleSetViewFavoursPage,
+}) {
   const loggedInNavbar = (
     <Navbar collapseOnSelect expand="md" bg="light" variant="light" className="top-navbar">
       <Navbar.Brand href="/">
@@ -19,7 +21,7 @@ export default function TopNavbar({ user, handleSetCreateRequestPage, handleSetV
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav id="items">
           <Nav.Link href="#Requests" onClick={handleSetViewRequestsPage}>Requests</Nav.Link>
-          <Nav.Link href="#Favours">Favours</Nav.Link>
+          <Nav.Link href="#Favours" onClick={handleSetViewFavoursPage}>Favours</Nav.Link>
           <Nav.Link href="#Create" onClick={handleSetCreateRequestPage}>Create Request</Nav.Link>
           <Nav.Link href="#Profile">Profile</Nav.Link>
           <Nav.Link href="#Logout">Logout</Nav.Link>

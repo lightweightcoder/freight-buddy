@@ -308,7 +308,7 @@ const requestsList = [
   {
     category_id: 3,
     country_id: 236,
-    helper_id: 3,
+    helper_id: null,
     requester_id: 1,
     product_name: 'Ipad stand',
     description: '1 stand',

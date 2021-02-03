@@ -130,6 +130,18 @@ export default function requests(db) {
             },
           },
         );
+      } else if (newStatus === 'completed') {
+        // if new status is completed, update status
+        await db.Request.update(
+          {
+            status: newStatus,
+          },
+          {
+            where: {
+              id: requestId,
+            },
+          },
+        );
       }
 
       const updatedRequest = await db.Request.findOne({

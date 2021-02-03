@@ -65,4 +65,7 @@ export default function routes(app) {
 
   // get a list of requests made by the user
   app.get('/users/requests', checkAuth, UsersController.requests);
+
+  // get a list of favours for a user
+  app.get('/users/favours', checkAuth, UsersController.favours);
 }
