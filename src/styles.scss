@@ -107,6 +107,34 @@ body {
   border-bottom: 1px solid black !important;
 }
 
+#requests-page-requests-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.requests-page-request-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .request-helper-name,
+  .request-price {
+    font-size: 3vw;
+  }
+}
+
+.requests-page-request-col {
+  padding-left: 0;
+}
+
+.request-anchor {
+  color: inherit;
+  text-decoration: none;
+}
+
 /* for bootstrap col-sm */
 @media (min-width: 576px) {
   /* for RequestCard component */
@@ -133,7 +161,17 @@ body {
 
   /* for RequestsPage component */
   #statuses-navbar {
-    font-size: 0.9rem;
+    font-size: 1rem;
+  }
+
+  .requests-page-request-container {
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    .request-helper-name,
+    .request-price {
+      font-size: 0.9rem;
+    }
   }
 }
 

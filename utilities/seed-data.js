@@ -335,6 +335,21 @@ const requestsList = [
     created_at: new Date(),
     updated_at: new Date(),
   },
+  {
+    category_id: 3,
+    country_id: 103,
+    helper_id: null,
+    requester_id: 1,
+    product_name: 'Iphone case',
+    description: '1 case',
+    price: '20',
+    reference_link: 'https://www.lazada.sg/products/artwrap-party-favors-pirate-silver-earrings-i304034111-s538136757.html?spm=a2o42.lazmart_search.list.1.52093bb5eZo0Mz&search=1',
+    payment_filename: '/images/payments/wire-transfer.jpg',
+    status: 'requested',
+    shipping_address: 'Nicoll highway blk700A #09-891',
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
 ];
 
 const productPhotosList = [
@@ -371,6 +386,12 @@ const productPhotosList = [
   {
     request_id: 5,
     filename: '/images/products/skateboard.jpg',
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
+  {
+    request_id: 13,
+    filename: '/images/products/iphone-case.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },

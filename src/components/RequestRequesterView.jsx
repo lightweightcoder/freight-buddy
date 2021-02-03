@@ -12,7 +12,7 @@ export default function RequestRequesterView({ selectedRequest, changeSelectedRe
 
   // create a button to allow the requester to cancel his/her request if a helper has not accepted the request
   const CancelRequestButton = (
-    <button type="button" className="btn btn-danger" onClick={() => changeSelectedRequestStatus('cancel request')}>Cancel Request</button>
+    <button type="button" className="btn btn-danger" onClick={() => changeSelectedRequestStatus('cancelled')}>Cancel Request</button>
   );
 
   return (

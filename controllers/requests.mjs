@@ -141,6 +141,7 @@ export default function requests(db) {
           db.ProductPhoto,
           { model: db.User, as: 'requester' },
           { model: db.User, as: 'helper' },
+          db.Category,
         ],
       });
 

@@ -44,13 +44,13 @@ export default function App() {
 
         // set the user's requests details
         setUserRequests(result.data.requests);
+
+        setPage(pages.VIEW_REQUESTS);
       })
       .catch((error) => {
         // handle error
         console.log('get a user\'s requests error', error);
       });
-
-    setPage(pages.VIEW_REQUESTS);
   };
 
   // get the details of the selected request, then set the state of the page to
@@ -64,14 +64,14 @@ export default function App() {
 
         // set the request's details
         setSelectedRequest(result.data.request);
+
+        // set the page to view the selected request's details
+        setPage(pages.SHOW_REQUEST_HELPER_VIEW);
       })
       .catch((error) => {
         // handle error
         console.log('get a request details error', error);
       });
-
-    // set the page to view the selected request's details
-    setPage(pages.SHOW_REQUEST_HELPER_VIEW);
   };
 
   // change the status of the selected request in the DB and state variable
@@ -105,6 +105,9 @@ export default function App() {
 
         // set the request's details
         setSelectedRequest(result.data.createdRequest);
+
+        // set the page to view the selected request's details to the requester
+        setPage(pages.SHOW_REQUEST_REQUESTER_VIEW);
       })
       .catch((error) => {
         // handle error
@@ -115,9 +118,27 @@ export default function App() {
           window.location.assign('/login');
         }
       });
+  };
 
-    // set the page to view the selected request's details to the requester
-    setPage(pages.SHOW_REQUEST_REQUESTER_VIEW);
+  // get the details of the selected request, then set the state of the page to
+  // to display the request details to the requester
+  // this occurs when a requester clicks on his/her request at the requests VIEW_REQUESTS page
+  const selectAndViewARequestPageRequester = (id) => {
+    // get the request's details from the DB and set it in selectedRequest variable
+    axios.get(`/requests/${id}`)
+      .then((result) => {
+        console.log('request/:id result is', result);
+
+        // set the request's details
+        setSelectedRequest(result.data.request);
+
+        // set the page to view the selected request's details
+        setPage(pages.SHOW_REQUEST_REQUESTER_VIEW);
+      })
+      .catch((error) => {
+        // handle error
+        console.log('get a request details error', error);
+      });
   };
 
   // get a list of available requests, countries and categories when App is rendered
@@ -169,7 +190,7 @@ export default function App() {
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
         {(page === pages.SHOW_REQUEST_REQUESTER_VIEW) ? <RequestRequesterView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
-        {(page === pages.VIEW_REQUESTS) ? <RequestsPage userRequests={userRequests} /> : ''}
+        {(page === pages.VIEW_REQUESTS) ? <RequestsPage userRequests={userRequests} selectAndViewARequestPageRequester={selectAndViewARequestPageRequester} /> : ''}
       </AppErrorBoundary>
     </div>
   );
