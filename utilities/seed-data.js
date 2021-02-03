@@ -366,13 +366,13 @@ const productPhotosList = [
     updated_at: new Date(),
   },
   {
-    request_id: 2,
+    request_id: 3,
     filename: '/images/products/sg-dream.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
   {
-    request_id: 3,
+    request_id: 2,
     filename: '/images/products/uniqlo-shirt.jpg',
     created_at: new Date(),
     updated_at: new Date(),
