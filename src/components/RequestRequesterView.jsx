@@ -58,6 +58,7 @@ export default function RequestRequesterView({ selectedRequest, changeSelectedRe
       <div className="row">
         <div className="col-12">
           { /* somemore request details */ }
+          <p>{`Category: ${selectedRequest.category.name}`}</p>
           <p>{`Description: ${selectedRequest.description}`}</p>
           <p>{`Shipping Address: ${selectedRequest.shippingAddress}`}</p>
           <p><b>{`Status: ${selectedRequest.status}`}</b></p>
