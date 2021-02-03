@@ -84,6 +84,29 @@ body {
   text-align: center;
 }
 
+/* for RequestsPage component */
+#statuses-navbar {
+  font-size: 3vw;
+}
+
+#statuses-navbar > div {
+  display: inline-block;
+  margin-left: 5px;
+  margin-right: 5px;
+  padding-bottom: 5px;
+}
+
+#statuses-navbar > button {
+  margin-left: 5px;
+  margin-right: 5px;
+  background-color: transparent;
+  border: none;
+}
+
+.bottom-border {
+  border-bottom: 1px solid black !important;
+}
+
 /* for bootstrap col-sm */
 @media (min-width: 576px) {
   /* for RequestCard component */
@@ -96,7 +119,7 @@ body {
   }
 
   .request-card-price {
-    font-size: 0.7rem;
+    font-size: 0.5rem;
   }
 
   /* for RequestHelperView component */
@@ -106,6 +129,11 @@ body {
 
   .after-carousel-divider {
     display: none;
+  }
+
+  /* for RequestsPage component */
+  #statuses-navbar {
+    font-size: 0.9rem;
   }
 }
 

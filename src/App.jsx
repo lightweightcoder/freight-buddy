@@ -42,8 +42,8 @@ export default function App() {
       .then((result) => {
         console.log('user requests result is', result);
 
-        // // set the request's details
-        // setSelectedRequest(result.data.request);
+        // set the user's requests details
+        setUserRequests(result.data.requests);
       })
       .catch((error) => {
         // handle error

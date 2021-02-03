@@ -149,6 +149,17 @@ export default function users(db) {
     const { user } = req;
 
     try {
+      // object containing requests, where each key is the status of the delivery request
+      // and value is an array of requests corresponding to that status
+      const requests = {
+        requested: [],
+        accepted: [],
+        shipped: [],
+        completed: [],
+        cancelled: [],
+      };
+
+      // find all requests belonging to that user
       const requestsList = await db.Request.findAll({
         where: {
           requesterId: user.id,
@@ -165,7 +176,23 @@ export default function users(db) {
         ],
       });
 
-      data.requestsList = requestsList;
+      // store the requests in the requests object depending on the status of the request
+      for (let i = 0; i < requestsList.length; i += 1) {
+        const { status } = requestsList[i];
+        if (status === 'requested') {
+          requests.requested.push(requestsList[i]);
+        } else if (status === 'accepted') {
+          requests.accepted.push(requestsList[i]);
+        } else if (status === 'shipped') {
+          requests.shipped.push(requestsList[i]);
+        } else if (status === 'completed') {
+          requests.completed.push(requestsList[i]);
+        } else if (status === 'cancelled') {
+          requests.cancelled.push(requestsList[i]);
+        }
+      }
+
+      data.requests = requests;
       res.send(data);
     } catch (error) {
       console.log(error);
