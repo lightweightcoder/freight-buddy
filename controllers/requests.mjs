@@ -5,23 +5,44 @@ export default function requests(db) {
     // set object to store data to be sent to response
     const data = {};
 
-    try {
-      // store the user's data (or null if no user is logged in) gotten from the
-      // previous middleware, checkAuth
-      const { user } = req;
+    // store the user's data (or null if no user is logged in) gotten from the
+    // previous middleware, checkAuth
+    const { user } = req;
 
-      const requestsList = await db.Request.findAll({
-        where: {
-          status: 'requested',
-        },
-        include: [
-          db.Country,
-          db.ProductPhoto,
-        ],
-        order: [
-          ['createdAt', 'DESC'],
-        ],
-      });
+    // array of available requests
+    let requestsList;
+
+    try {
+      // if user is logged in, find available requests in the user's country,
+      // else find all requests
+      if (user !== null) {
+        requestsList = await db.Request.findAll({
+          where: {
+            status: 'requested',
+            countryId: user.countryId,
+          },
+          include: [
+            db.Country,
+            db.ProductPhoto,
+          ],
+          order: [
+            ['createdAt', 'DESC'],
+          ],
+        });
+      } else {
+        requestsList = await db.Request.findAll({
+          where: {
+            status: 'requested',
+          },
+          include: [
+            db.Country,
+            db.ProductPhoto,
+          ],
+          order: [
+            ['createdAt', 'DESC'],
+          ],
+        });
+      }
 
       data.requestsList = requestsList;
       data.user = user;
