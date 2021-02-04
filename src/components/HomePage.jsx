@@ -1,11 +1,23 @@
 /* eslint-disable react/prop-types */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // import 'react-multi-carousel/lib/styles.css';
 import RequestCard from './RequestCard.jsx';
 
 export default function HomePage({ selectAndViewARequestPageHelper, availableRequests }) {
   if (availableRequests === null) {
     return <div />;
+  }
+
+  if (availableRequests.length === 0) {
+    return (
+      <div className="container">
+        <div className="row">
+          <div className="col-12">
+            <p id="no-requests-msg">There are currently no available requests made to your country.</p>
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
