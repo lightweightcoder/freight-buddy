@@ -198,9 +198,11 @@ export default function requests(db) {
       // store the user's data (or null if no user is logged in) gotten from the
       // previous middleware, checkAuth
       const { user } = req;
+      console.log('user is', user);
 
       // get the delivery request to be created from request body
       const request = req.body;
+      console.log('req.body is', request);
 
       // if there is no logged in user, send a 403 request forbidden response
       if (user === null) {
@@ -211,6 +213,25 @@ export default function requests(db) {
       }
 
       const newRequest = await db.Request.create(request);
+
+      // get the request's product photos uploaded by multer
+      const { files } = req;
+      // array to store information to be saved in the productPhotos DB table
+      const productPhotos = [];
+      for (let i = 0; i < files.length; i += 1) {
+        productPhotos.push({
+          requestId: newRequest.id,
+          filename: `/images/products/${files[i].filename}`,
+        });
+      }
+      // array to store the returned model instances after inserting the productPhotos into the DB
+      const productPhotosInstances = [];
+      // insert the productPhotos into the DB
+      for (let i = 0; i < productPhotos.length; i += 1) {
+        productPhotosInstances.push(db.ProductPhoto.create(productPhotos[i]));
+      }
+      // wait for all the productPhotos to be uploaded into the DB
+      await Promise.all(productPhotosInstances);
 
       const createdRequest = await db.Request.findOne({
         where: {

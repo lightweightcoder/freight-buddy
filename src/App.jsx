@@ -120,10 +120,27 @@ export default function App() {
   // create a request in the DB, set that request as the selected request
   // and set the page state variable to display the request details to the requester
   const createRequestAndSetRequestDetailsPage = (request) => {
-    // post a request to create the new request
-    axios.post('/requests', request)
+    const data = new FormData();
+
+    for (let x = 0; x < request.productPhotos.length; x += 1) {
+      data.append('file', request.productPhotos[x]);
+      console.log('request.productPhotos[x] is', request.productPhotos[x]);
+    }
+
+    data.append('productName', request.productName);
+    data.append('description', request.description);
+    data.append('price', request.price);
+    data.append('referenceLink', request.referenceLink);
+    data.append('shippingAddress', request.shippingAddress);
+    data.append('status', request.status);
+    data.append('requesterId', request.requesterId);
+    data.append('countryId', request.countryId);
+    data.append('categoryId', request.categoryId);
+
+    // post a request to create the new request and upload the photos for that request
+    axios.post('/requests', data)
       .then((result) => {
-        console.log('new request result is', result);
+        console.log('upload photos and created request result is', result);
 
         // set the request's details
         setSelectedRequest(result.data.createdRequest);
@@ -133,7 +150,7 @@ export default function App() {
       })
       .catch((error) => {
         // handle error
-        console.log('create a request error', error);
+        console.log('upload photos and creat request error', error);
 
         // redirect user to login page as user tried to access a forbidden page
         if (error.message === 'Request failed with status code 403') {

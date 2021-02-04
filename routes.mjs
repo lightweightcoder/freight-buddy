@@ -20,8 +20,21 @@ export default function routes(app) {
   const CategoriesController = categories(db);
 
   // multer settings ------------------------
-  // set the name of the upload directory here for multer
-  const multerUpload = multer({ dest: 'uploads/product-photos' });
+  // set the name of the upload directory and filename of uploaded photos here for multer
+  const storage = multer.diskStorage({
+    destination(req, file, cb) {
+      cb(null, 'public/images/products');
+    },
+    filename(req, file, cb) {
+      cb(null, `${Date.now()}-${file.originalname}`);
+    },
+  });
+
+  // using the configuration in the storage varible, generate a middleware to process
+  // multiple files sharing the same field name of 'file'
+  // the `Request` object will be populated with a `files` array containing
+  // an information object for each processed file.
+  const multerUpload = multer({ storage }).array('file');
 
   // special JS page. Include the webpack index.html file
   app.get('/', (request, response) => {
@@ -60,8 +73,7 @@ export default function routes(app) {
   app.get('/categories', CategoriesController.index);
 
   // accept request to create a request
-  // app.post('/requests', checkAuth, multerUpload.single('photo'));
-  app.post('/requests', checkAuth, RequestsController.create);
+  // app.post('/requests', checkAuth, RequestsController.create);
 
   // get a list of requests made by the user
   app.get('/users/requests', checkAuth, UsersController.requests);
@@ -71,4 +83,18 @@ export default function routes(app) {
 
   // logout a user
   app.delete('/logout', UsersController.logout);
+
+  // upload photos into /public/images/products folder and creates a new request
+  app.post('/requests', checkAuth, (req, res, next) => {
+    multerUpload(req, res, (err) => {
+      if (err instanceof multer.MulterError) {
+        return res.status(500).send(err);
+      } if (err) {
+        return res.status(500).send(err);
+      }
+      // no error
+      next();
+    });
+  },
+  RequestsController.create);
 }

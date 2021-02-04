@@ -7,7 +7,7 @@ export default function CreateRequestPage({
 }) {
   // to store the request to be added to DB
   const [request, setRequest] = useState({
-    productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1,
+    productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1, productPhotos: [],
   });
 
   // create JSX for country options elements for form
@@ -77,6 +77,10 @@ export default function CreateRequestPage({
     setRequest({ ...request, categoryId: event.target.value });
   };
 
+  const handleSelectPhotosChange = (event) => {
+    setRequest({ ...request, productPhotos: event.target.files });
+  };
+
   return (
     <div>
       <div className="row">
@@ -133,11 +137,11 @@ export default function CreateRequestPage({
                 <Form.Label>Shipping Address</Form.Label>
                 <Form.Control type="text" value={request.shippingAddress} onChange={handleShippingAddressChange} />
               </Form.Group>
-              {/* <Form.Group>
+              <Form.Group>
                 <Form.Label>Product photos (up to 3)</Form.Label>
                 <br />
-                <input type="file" name="photo" />
-              </Form.Group> */}
+                <input type="file" name="file" multiple onChange={handleSelectPhotosChange} />
+              </Form.Group>
 
               <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>
             </Form>
