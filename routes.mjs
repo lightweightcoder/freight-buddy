@@ -68,4 +68,7 @@ export default function routes(app) {
 
   // get a list of favours for a user
   app.get('/users/favours', checkAuth, UsersController.favours);
+
+  // logout a user
+  app.delete('/logout', UsersController.logout);
 }

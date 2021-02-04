@@ -163,6 +163,19 @@ export default function App() {
       });
   };
 
+  // handle to log a user out and set the state of the page to the homepage
+  const handleLogout = () => {
+    axios.delete('/logout')
+      .then(() => {
+        // reload the homepage to get a list of available requests for no logged in user
+        window.location.assign('/');
+      })
+      .catch((error) => {
+        // handle error
+        console.log('logout a user error', error);
+      });
+  };
+
   // get a list of available requests, countries and categories when App is rendered
   useEffect(() => {
     axios.get('/requests')
@@ -207,7 +220,7 @@ export default function App() {
   return (
     <div>
       <AppErrorBoundary>
-        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} handleSetViewFavoursPage={handleSetViewFavoursPage} />
+        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} handleSetViewFavoursPage={handleSetViewFavoursPage} handleLogout={handleLogout} />
         {(page === pages.HOME) ? <HomePage selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} availableRequests={availableRequests} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}

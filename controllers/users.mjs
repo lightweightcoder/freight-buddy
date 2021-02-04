@@ -264,7 +264,16 @@ export default function users(db) {
     }
   };
 
+  const logout = async (req, res) => {
+    console.log('request to logout came in');
+
+    res.clearCookie('userId');
+    res.clearCookie('loggedInHash');
+
+    res.send('logged out');
+  };
+
   return {
-    login, getRegistrationPage, register, requests, favours,
+    login, getRegistrationPage, register, requests, favours, logout,
   };
 }

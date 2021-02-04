@@ -1,10 +1,11 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 
 export default function TopNavbar({
-  user, handleSetCreateRequestPage, handleSetViewRequestsPage, handleSetViewFavoursPage,
+  // eslint-disable-next-line max-len
+  user, handleSetCreateRequestPage, handleSetViewRequestsPage, handleSetViewFavoursPage, handleLogout,
 }) {
   const loggedInNavbar = (
     <Navbar collapseOnSelect expand="md" bg="light" variant="light" className="top-navbar">
@@ -24,7 +25,7 @@ export default function TopNavbar({
           <Nav.Link href="#Favours" onClick={handleSetViewFavoursPage}>Favours</Nav.Link>
           <Nav.Link href="#Create" onClick={handleSetCreateRequestPage}>Create Request</Nav.Link>
           <Nav.Link href="#Profile">Profile</Nav.Link>
-          <Nav.Link href="#Logout">Logout</Nav.Link>
+          <Nav.Link href="#Logout" onClick={handleLogout}>Logout</Nav.Link>
         </Nav>
       </Navbar.Collapse>
     </Navbar>
