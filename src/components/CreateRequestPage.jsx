@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
@@ -7,7 +8,7 @@ export default function CreateRequestPage({
 }) {
   // to store the request to be added to DB
   const [request, setRequest] = useState({
-    productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1, productPhotos: [],
+    productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1, productPhotos: [], payment: '',
   });
 
   // create JSX for country options elements for form
@@ -45,8 +46,7 @@ export default function CreateRequestPage({
 
       if (filteredPrice !== null) {
         // convert the price to 2 decimal places (rounded down)
-        updatedPrice = Number.parseFloat(filteredPrice[0]).toFixed(2);
-        console.log('updated price is', updatedPrice);
+        updatedPrice = Math.floor(Number(filteredPrice[0]) * 100) / 100;
       } else {
         updatedPrice = '';
       }
@@ -79,6 +79,10 @@ export default function CreateRequestPage({
 
   const handleSelectPhotosChange = (event) => {
     setRequest({ ...request, productPhotos: event.target.files });
+  };
+
+  const handlePaymentUploadChange = (event) => {
+    setRequest({ ...request, payment: event.target.files[0] });
   };
 
   return (
@@ -141,6 +145,14 @@ export default function CreateRequestPage({
                 <Form.Label>Product photos (up to 3)</Form.Label>
                 <br />
                 <input type="file" name="productPhotos" multiple onChange={handleSelectPhotosChange} />
+              </Form.Group>
+              <Form.Group>
+                <Form.Label>Payment Slip</Form.Label>
+                <Form.Text className="text-muted">
+                  Make a wire transfer of the offered price to freight-buddy. Bank name: DBS, Account number: 256-09876-25. Upload an image of the transfer details here.
+                </Form.Text>
+                <br />
+                <input type="file" name="payment" onChange={handlePaymentUploadChange} />
               </Form.Group>
 
               <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>
