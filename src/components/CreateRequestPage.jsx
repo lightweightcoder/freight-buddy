@@ -140,7 +140,7 @@ export default function CreateRequestPage({
               <Form.Group>
                 <Form.Label>Product photos (up to 3)</Form.Label>
                 <br />
-                <input type="file" name="file" multiple onChange={handleSelectPhotosChange} />
+                <input type="file" name="productPhotos" multiple onChange={handleSelectPhotosChange} />
               </Form.Group>
 
               <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>

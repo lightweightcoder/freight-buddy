@@ -123,7 +123,7 @@ export default function App() {
     const data = new FormData();
 
     for (let x = 0; x < request.productPhotos.length; x += 1) {
-      data.append('file', request.productPhotos[x]);
+      data.append('productPhotos', request.productPhotos[x]);
       console.log('request.productPhotos[x] is', request.productPhotos[x]);
     }
 

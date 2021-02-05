@@ -215,20 +215,20 @@ export default function requests(db) {
       const newRequest = await db.Request.create(request);
 
       // get the request's product photos uploaded by multer
-      const { files } = req;
+      const { productPhotosFiles } = req;
       // array to store information to be saved in the productPhotos DB table
-      const productPhotos = [];
-      for (let i = 0; i < files.length; i += 1) {
-        productPhotos.push({
+      const productPhotosData = [];
+      for (let i = 0; i < productPhotosFiles.length; i += 1) {
+        productPhotosData.push({
           requestId: newRequest.id,
-          filename: `/images/products/${files[i].filename}`,
+          filename: `/images/products/${productPhotosFiles[i].filename}`,
         });
       }
       // array to store the returned model instances after inserting the productPhotos into the DB
       const productPhotosInstances = [];
       // insert the productPhotos into the DB
-      for (let i = 0; i < productPhotos.length; i += 1) {
-        productPhotosInstances.push(db.ProductPhoto.create(productPhotos[i]));
+      for (let i = 0; i < productPhotosData.length; i += 1) {
+        productPhotosInstances.push(db.ProductPhoto.create(productPhotosData[i]));
       }
       // wait for all the productPhotos to be uploaded into the DB
       await Promise.all(productPhotosInstances);
