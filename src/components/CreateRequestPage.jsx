@@ -144,7 +144,7 @@ export default function CreateRequestPage({
               <Form.Group>
                 <Form.Label>Product photos (up to 3)</Form.Label>
                 <br />
-                <input type="file" name="productPhotos" multiple onChange={handleSelectPhotosChange} />
+                <input type="file" multiple onChange={handleSelectPhotosChange} />
               </Form.Group>
               <Form.Group>
                 <Form.Label>Payment Slip</Form.Label>
@@ -152,7 +152,7 @@ export default function CreateRequestPage({
                   Make a wire transfer of the offered price to freight-buddy. Bank name: DBS, Account number: 256-09876-25. Upload an image of the transfer details here.
                 </Form.Text>
                 <br />
-                <input type="file" name="payment" onChange={handlePaymentUploadChange} />
+                <input type="file" onChange={handlePaymentUploadChange} />
               </Form.Group>
 
               <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>

@@ -120,6 +120,9 @@ export default function App() {
   // create a request in the DB, set that request as the selected request
   // and set the page state variable to display the request details to the requester
   const createRequestAndSetRequestDetailsPage = (request) => {
+    // create a new FormData object to construct a set of key/value pairs representing form fields and their values
+    // uses the same format a form would use if the encoding type were set to "multipart/form-data"
+    // visit https://developer.mozilla.org/en-US/docs/Web/API/FormData for more info
     const data = new FormData();
 
     for (let x = 0; x < request.productPhotos.length; x += 1) {
@@ -127,6 +130,7 @@ export default function App() {
       console.log('request.productPhotos[x] is', request.productPhotos[x]);
     }
 
+    // append the request's details as key/value pairs into the FormData object
     data.append('payment', request.payment);
     data.append('productName', request.productName);
     data.append('description', request.description);
