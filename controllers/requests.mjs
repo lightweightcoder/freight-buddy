@@ -200,9 +200,11 @@ export default function requests(db) {
       const { user } = req;
       console.log('user is', user);
 
-      // get the delivery request to be created from request body
+      // get the delivery request from request body.
+      // this will contain details to create a request in the DB
       const request = req.body;
-      console.log('req.body is', request);
+      // add the payment filename to the delivery request details
+      request.paymentFilename = `/images/request-photos/${req.paymentFile.filename}`;
 
       // if there is no logged in user, send a 403 request forbidden response
       if (user === null) {
@@ -221,7 +223,7 @@ export default function requests(db) {
       for (let i = 0; i < productPhotosFiles.length; i += 1) {
         productPhotosData.push({
           requestId: newRequest.id,
-          filename: `/images/products/${productPhotosFiles[i].filename}`,
+          filename: `/images/request-photos/${productPhotosFiles[i].filename}`,
         });
       }
       // array to store the returned model instances after inserting the productPhotos into the DB

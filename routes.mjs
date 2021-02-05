@@ -1,6 +1,5 @@
 import { resolve } from 'path';
 import multer from 'multer';
-import { EDESTADDRREQ } from 'constants';
 import db from './models/index.mjs';
 
 // import checkAuth middleware
@@ -24,7 +23,7 @@ export default function routes(app) {
   // set the name of the upload directory and filename of uploaded photos here for multer
   const storage = multer.diskStorage({
     destination(req, file, cb) {
-      cb(null, 'public/images/products');
+      cb(null, 'public/images/request-photos');
     },
     filename(req, file, cb) {
       cb(null, `${Date.now()}-${file.fieldname}-${file.originalname}`);
@@ -32,10 +31,19 @@ export default function routes(app) {
   });
 
   // using the configuration in the storage varible, generate a middleware to process
-  // multiple files sharing the same field name of 'file'
-  // the `Request` object will be populated with a `files` array containing
-  // an information object for each processed file.
-  const multerUpload = multer({ storage }).array('productPhotos');
+  // multiple files for the field names 'payment' and 'product photos'
+  // to upload images of a request's payment details and product photos respectively
+  // the `Request` object will be populated with a `files` object which
+  // maps each field name to an array of the associated file information objects.
+  const multerRequestPhotosUpload = multer({ storage })
+    .fields([
+      {
+        name: 'productPhotos',
+      },
+      {
+        name: 'payment',
+      },
+    ]);
 
   // special JS page. Include the webpack index.html file
   app.get('/', (request, response) => {
@@ -82,20 +90,24 @@ export default function routes(app) {
   // logout a user
   app.delete('/logout', UsersController.logout);
 
-  // upload photos into /public/images/products folder and creates a new request
-  app.post('/requests', checkAuth, (req, res, next) => {
-    multerUpload(req, res, (err) => {
-      if (err instanceof multer.MulterError) {
-        return res.status(500).send(err);
-      } if (err) {
-        return res.status(500).send(err);
-      }
+  // upload photos into /public/images/request-photos folder and creates a new request
+  app.post('/requests', checkAuth,
+    (req, res, next) => {
+      console.log('going to do uploads');
+      multerRequestPhotosUpload(req, res, (err) => {
+        if (err instanceof multer.MulterError) {
+          return res.status(500).send(err);
+        } if (err) {
+          return res.status(500).send(err);
+        }
 
-      // store the files in the request object as productPhotosFiles
-      req.productPhotosFiles = req.files;
-      // no error
-      next();
-    });
-  },
-  RequestsController.create);
+        // store the files in the request object as productPhotosFiles
+        req.productPhotosFiles = req.files.productPhotos;
+        // eslint-disable-next-line prefer-destructuring
+        req.paymentFile = req.files.payment[0];
+        // no error
+        next();
+      });
+    },
+    RequestsController.create);
 }

@@ -127,6 +127,7 @@ export default function App() {
       console.log('request.productPhotos[x] is', request.productPhotos[x]);
     }
 
+    data.append('payment', request.payment);
     data.append('productName', request.productName);
     data.append('description', request.description);
     data.append('price', request.price);
@@ -150,7 +151,7 @@ export default function App() {
       })
       .catch((error) => {
         // handle error
-        console.log('upload photos and creat request error', error);
+        console.log('upload photos and create request error', error);
 
         // redirect user to login page as user tried to access a forbidden page
         if (error.message === 'Request failed with status code 403') {
