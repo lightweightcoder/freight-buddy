@@ -45,7 +45,7 @@ export default function CreateRequestPage({
 
       if (filteredPrice !== null) {
         // convert the price to 2 decimal places (rounded down)
-        updatedPrice = Math.floor(Number(filteredPrice[0]) * 100) / 100;
+        updatedPrice = Number.parseFloat(filteredPrice[0]).toFixed(2);
         console.log('updated price is', updatedPrice);
       } else {
         updatedPrice = '';
