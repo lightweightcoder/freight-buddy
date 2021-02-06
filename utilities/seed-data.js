@@ -355,7 +355,7 @@ const requestsList = [
 const productPhotosList = [
   {
     request_id: 1,
-    filename: '/images/products/bak-kwa.jpg',
+    filename: '/images/request-photos/bak-kwa.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
@@ -367,31 +367,31 @@ const productPhotosList = [
   },
   {
     request_id: 3,
-    filename: '/images/products/sg-dream.jpg',
+    filename: '/images/request-photos/sg-dream.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
   {
     request_id: 2,
-    filename: '/images/products/uniqlo-shirt.jpg',
+    filename: '/images/request-photos/uniqlo-shirt.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
   {
     request_id: 4,
-    filename: '/images/products/prism.jpg',
+    filename: '/images/request-photos/prism.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
   {
     request_id: 5,
-    filename: '/images/products/skateboard.jpg',
+    filename: '/images/request-photos/skateboard.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
   {
     request_id: 13,
-    filename: '/images/products/iphone-case.jpg',
+    filename: '/images/request-photos/iphone-case.jpg',
     created_at: new Date(),
     updated_at: new Date(),
   },
