@@ -26,20 +26,20 @@ app.use(express.static('public'));
 app.use(express.static('dist'));
 
 // Set up Webpack in dev env
-const env = process.env.NODE_ENV || 'development';
-if (env === 'development') {
-  const compiler = webpack(webpackConfig);
-  app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    // html only
-    writeToDisk: (filePath) => /\.html$/.test(filePath),
-  }));
-  app.use(webpackHotMiddleware(compiler, {
-    log: false,
-    path: '/__webpack_hmr',
-    heartbeat: 10 * 1000,
-  }));
-}
+// const env = process.env.NODE_ENV || 'development';
+// if (env === 'development') {
+//   const compiler = webpack(webpackConfig);
+//   app.use(webpackDevMiddleware(compiler, {
+//     publicPath: webpackConfig.output.publicPath,
+//     // html only
+//     writeToDisk: (filePath) => /\.html$/.test(filePath),
+//   }));
+//   app.use(webpackHotMiddleware(compiler, {
+//     log: false,
+//     path: '/__webpack_hmr',
+//     heartbeat: 10 * 1000,
+//   }));
+// }
 
 // Bind route definitions to the Express application
 bindRoutes(app);
