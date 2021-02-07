@@ -94,18 +94,23 @@ export default function RequestsPage({ userRequests, selectAndViewARequestPageRe
           <div className="col-12 col-sm-9 col-md-6 d-flex justify-content-center" id="statuses-navbar">
             <button className={requestedStatusBorderClass} onClick={handleRequestedStatusClick} type="button">
               requested
+              {`(${userRequests.requested.length})`}
             </button>
             <button className={acceptedStatusBorderClass} onClick={handleAcceptedStatusClick} type="button">
               accepted
+              {`(${userRequests.accepted.length})`}
             </button>
             <button className={shippedStatusBorderClass} onClick={handleShippedStatusClick} type="button">
               shipped
+              {`(${userRequests.shipped.length})`}
             </button>
             <button className={completedStatusBorderClass} onClick={handleCompletedStatusClick} type="button">
               completed
+              {`(${userRequests.completed.length})`}
             </button>
             <button className={cancelledStatusBorderClass} onClick={handleCancelledStatusClick} type="button">
               cancelled
+              {`(${userRequests.cancelled.length})`}
             </button>
           </div>
         </div>

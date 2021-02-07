@@ -94,18 +94,23 @@ export default function FavoursPage({ userFavours, selectAndViewARequestPageHelp
           <div className="col-12 col-sm-9 col-md-6 d-flex justify-content-center" id="statuses-navbar">
             <button className={requestedStatusBorderClass} onClick={handleRequestedStatusClick} type="button">
               requested
+              {`(${userFavours.requested.length})`}
             </button>
             <button className={acceptedStatusBorderClass} onClick={handleAcceptedStatusClick} type="button">
               accepted
+              {`(${userFavours.accepted.length})`}
             </button>
             <button className={shippedStatusBorderClass} onClick={handleShippedStatusClick} type="button">
               shipped
+              {`(${userFavours.shipped.length})`}
             </button>
             <button className={completedStatusBorderClass} onClick={handleCompletedStatusClick} type="button">
               completed
+              {`(${userFavours.completed.length})`}
             </button>
             <button className={cancelledStatusBorderClass} onClick={handleCancelledStatusClick} type="button">
               cancelled
+              {`(${userFavours.cancelled.length})`}
             </button>
           </div>
         </div>
