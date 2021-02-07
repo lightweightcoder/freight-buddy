@@ -198,7 +198,6 @@ export default function requests(db) {
       // store the user's data (or null if no user is logged in) gotten from the
       // previous middleware, checkAuth
       const { user } = req;
-      console.log('user is', user);
 
       // get the delivery request from request body.
       // this will contain details to create a request in the DB
