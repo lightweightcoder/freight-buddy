@@ -204,7 +204,9 @@ export default function requests(db) {
       // this will contain details to create a request in the DB
       const request = req.body;
       // add the payment filename to the delivery request details
-      request.paymentFilename = `/images/request-photos/${req.paymentFile.filename}`;
+      // request.paymentFilename = `/images/request-photos/${req.paymentFile.filename}`;
+      // add the payment filename to the delivery request details (for aws-s3)
+      request.paymentFilename = req.paymentFile.location;
 
       // if there is no logged in user, send a 403 request forbidden response
       if (user === null) {
@@ -223,7 +225,10 @@ export default function requests(db) {
       for (let i = 0; i < productPhotosFiles.length; i += 1) {
         productPhotosData.push({
           requestId: newRequest.id,
-          filename: `/images/request-photos/${productPhotosFiles[i].filename}`,
+          // for local storage
+          // filename: `/images/request-photos/${productPhotosFiles[i].filename}`,
+          // for aws-s3 storage
+          filename: productPhotosFiles[i].location,
         });
       }
       // array to store the returned model instances after inserting the productPhotos into the DB
