@@ -5,11 +5,11 @@ import Nav from 'react-bootstrap/Nav';
 
 export default function TopNavbar({
   // eslint-disable-next-line max-len
-  user, handleSetCreateRequestPage, handleSetViewRequestsPage, handleSetViewFavoursPage, handleLogout,
+  user, handleSetCreateRequestPage, handleSetViewRequestsPage, handleSetViewFavoursPage, handleLogout, handleViewHomePage,
 }) {
   const loggedInNavbar = (
     <Navbar collapseOnSelect expand="md" bg="light" variant="light" className="top-navbar">
-      <Navbar.Brand href="/">
+      <Navbar.Brand href="#home" onClick={handleViewHomePage}>
         <img
           src="/package.svg"
           width="30"

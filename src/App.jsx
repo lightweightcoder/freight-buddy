@@ -198,6 +198,12 @@ export default function App() {
       });
   };
 
+  // handle to redirect user to the homepage
+  const handleViewHomePage = () => {
+    // reload the homepage to get a list of available requests for no logged in user
+    window.location.assign('/');
+  };
+
   // get a list of available requests, countries and categories when App is rendered
   useEffect(() => {
     axios.get('/requests')
@@ -242,7 +248,7 @@ export default function App() {
   return (
     <div>
       <AppErrorBoundary>
-        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} handleSetViewFavoursPage={handleSetViewFavoursPage} handleLogout={handleLogout} />
+        <TopNavbar user={user} handleSetCreateRequestPage={handleSetCreateRequestPage} handleSetViewRequestsPage={handleSetViewRequestsPage} handleSetViewFavoursPage={handleSetViewFavoursPage} handleLogout={handleLogout} handleViewHomePage={handleViewHomePage} />
         {(page === pages.HOME) ? <HomePage selectAndViewARequestPageHelper={selectAndViewARequestPageHelper} availableRequests={availableRequests} /> : ''}
         {(page === pages.SHOW_REQUEST_HELPER_VIEW) ? <RequestHelperView selectedRequest={selectedRequest} changeSelectedRequestStatus={changeSelectedRequestStatus} /> : ''}
         {(page === pages.CREATE_REQUEST) ? <CreateRequestPage user={user} countriesList={countriesList} categoriesList={categoriesList} createRequestAndSetRequestDetailsPage={createRequestAndSetRequestDetailsPage} /> : ''}
