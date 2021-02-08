@@ -94,8 +94,8 @@ export default function CreateRequestPage({
       </div>
 
       <div className="container" id="create-request-form-container">
-        <div className="row">
-          <div className="col-12">
+        <div className="row justify-content-center">
+          <div className="col-12 col-sm-10 col-md-8">
             <Form>
               <Form.Group controlId="productName">
                 <Form.Label>Product Name</Form.Label>
@@ -148,11 +148,11 @@ export default function CreateRequestPage({
               </Form.Group>
               <Form.Group>
                 <Form.Label>Payment Slip</Form.Label>
+                <br />
+                <input type="file" onChange={handlePaymentUploadChange} />
                 <Form.Text className="text-muted">
                   Make a wire transfer of the offered price to freight-buddy. Bank name: DBS, Account number: 256-09876-25. Upload an image of the transfer details here.
                 </Form.Text>
-                <br />
-                <input type="file" onChange={handlePaymentUploadChange} />
               </Form.Group>
 
               <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>

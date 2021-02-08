@@ -18,7 +18,7 @@ export default function RequestRequesterViewButton({ status, changeSelectedReque
   // the requester on the status of the request
   if (status === 'requested' || status === 'accepted') {
     return (
-      <button type="button" className="btn btn-secondary" disabled>{buttonText}</button>
+      <button type="button" id="request-requester-view-button" className="btn btn-secondary" disabled>{buttonText}</button>
     );
   }
 

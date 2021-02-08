@@ -60,10 +60,10 @@ export default function RequestsPage({ userRequests, selectAndViewARequestPageRe
     <div className="row d-flex justify-content-center" key={request.id}>
       <div className="col-12 col-sm-10 col-md-8 col-lg-6">
         <a className="request-anchor" href="#request" onClick={() => selectAndViewARequestPageRequester(request.id)}>
-          <div className="container border requests-page-request-container">
+          <div className="container rounded requests-page-request-container">
             <div className="row">
               <div className="col-3 requests-page-request-col">
-                <img className="rounded border border-secondary img-fluid" src={(request.productPhotos.length > 0) ? request.productPhotos[0].filename : 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg'} alt="product" />
+                <img className="img-fluid" src={(request.productPhotos.length > 0) ? request.productPhotos[0].filename : 'https://thumbs.dreamstime.com/b/no-image-available-icon-photo-camera-flat-vector-illustration-132483141.jpg'} alt="product" />
               </div>
               <div className="col-9 d-flex flex-column justify-content-center">
                 <p>{request.productName}</p>

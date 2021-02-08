@@ -13,7 +13,7 @@ export default function RequestCard({
   };
 
   return (
-    <div className="col-4 col-md-3">
+    <div className="col-4 col-md-3 col-xl-2">
       <a href="#view-request" className="request-card-link" onClick={handleClick}>
         <Card className="request-card">
           <Card.Img variant="top" src={photo} />

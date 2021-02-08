@@ -88,9 +88,22 @@ body {
   margin-bottom: 0;
 }
 
+/* for RequestRequesterViewButton component */
+#request-requester-view-button {
+  margin-bottom: 5px;
+}
+
 /* for CreateRequestPage component */
 #new-request-form-heading {
   text-align: center;
+}
+
+#create-request-form-container {
+  margin-bottom: 20px;
+
+  .form-text {
+    color: black !important;
+  }
 }
 
 /* for RequestsPage component */
@@ -124,6 +137,8 @@ body {
 .requests-page-request-container {
   margin-top: 10px;
   margin-bottom: 10px;
+  border: 2px solid #ddddde;
+  background-color: #ffffffcc;
 
   p {
     margin-bottom: 0;
@@ -145,6 +160,27 @@ body {
 }
 
 /* for FavoursPage component*/
+.favours-page-request-container {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 2px solid #ddddde;
+  background-color: #f8e6cfd6;
+
+  p {
+    margin-bottom: 0;
+  }
+
+  .request-helper-name,
+  .request-price {
+    font-size: 3vw;
+  }
+}
+
+#favours-page-requests-container {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
 .request-requester-name {
   font-size: 3vw;
 }
@@ -179,9 +215,6 @@ body {
   }
 
   .requests-page-request-container {
-    margin-top: 10px;
-    margin-bottom: 10px;
-
     .request-helper-name,
     .request-price {
       font-size: 0.9rem;
@@ -189,6 +222,13 @@ body {
   }
 
   /* for FavoursPage component*/
+  .favours-page-request-container {
+    .request-helper-name,
+    .request-price {
+      font-size: 0.9rem;
+    }
+  }
+
   .request-requester-name {
     font-size: 0.9rem;
   }
