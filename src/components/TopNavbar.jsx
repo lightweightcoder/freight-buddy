@@ -24,7 +24,6 @@ export default function TopNavbar({
           <Nav.Link href="#Requests" onClick={handleSetViewRequestsPage}>Requests</Nav.Link>
           <Nav.Link href="#Favours" onClick={handleSetViewFavoursPage}>Favours</Nav.Link>
           <Nav.Link href="#Create" onClick={handleSetCreateRequestPage}>Create Request</Nav.Link>
-          <Nav.Link href="#Profile">Profile</Nav.Link>
           <Nav.Link href="#Logout" onClick={handleLogout}>Logout</Nav.Link>
         </Nav>
       </Navbar.Collapse>

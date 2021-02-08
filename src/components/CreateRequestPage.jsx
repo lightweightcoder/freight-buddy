@@ -95,7 +95,7 @@ export default function CreateRequestPage({
 
       <div className="container" id="create-request-form-container">
         <div className="row justify-content-center">
-          <div className="col-12 col-sm-10 col-md-8">
+          <div className="col-12 col-sm-10 col-lg-8">
             <Form>
               <Form.Group controlId="productName">
                 <Form.Label>Product Name</Form.Label>
@@ -155,7 +155,7 @@ export default function CreateRequestPage({
                 </Form.Text>
               </Form.Group>
 
-              <button type="button" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>
+              <button type="button" id="create-request-btn" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>
             </Form>
           </div>
         </div>

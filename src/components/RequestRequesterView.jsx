@@ -12,11 +12,11 @@ export default function RequestRequesterView({ selectedRequest, changeSelectedRe
 
   // create a button to allow the requester to cancel his/her request if a helper has not accepted the request
   const CancelRequestButton = (
-    <button type="button" className="btn btn-danger" onClick={() => changeSelectedRequestStatus('cancelled')}>Cancel Request</button>
+    <button type="button" id="cancel-request-btn" className="btn btn-outline-danger" onClick={() => changeSelectedRequestStatus('cancelled')}>Cancel Request</button>
   );
 
   return (
-    <div className="container">
+    <div className="container" id="request-details-container">
       <div className="row">
         { /* product name and request id */ }
         <div className="col-12 product-name">
@@ -47,9 +47,7 @@ export default function RequestRequesterView({ selectedRequest, changeSelectedRe
                 Reference Link:
                 {' '}
                 <br />
-                <small>
-                  <a href={selectedRequest.referenceLink}>{selectedRequest.referenceLink}</a>
-                </small>
+                <a href={selectedRequest.referenceLink}>open link</a>
               </p>
             </div>
           </div>
