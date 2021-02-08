@@ -35,7 +35,7 @@ if (env === 'development') {
 
   // destructure the default import and name the variable
   // see more here: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#importing_defaults
-   const { default: webpack } = await import('webpack')
+  const { default: webpack } = await import('webpack')
 
   const { default: webpackDevMiddleware } =  await import('webpack-dev-middleware');
   const { default: webpackHotMiddleware } = await import('webpack-hot-middleware');
