@@ -18,7 +18,7 @@ export default function RequestHelperViewButton({ status, changeSelectedRequestS
   // requester to confirm the delivery of the product
   if (status === 'shipped') {
     return (
-      <button type="button" className="btn btn-secondary" disabled>waiting for requester to confirm delivery</button>
+      <button type="button" id="request-helper-view-button" className="btn btn-secondary" disabled>waiting for requester to confirm delivery</button>
     );
   }
 
@@ -36,6 +36,6 @@ export default function RequestHelperViewButton({ status, changeSelectedRequestS
   }
 
   return (
-    <button type="button" className="btn btn-primary" onClick={() => changeSelectedRequestStatus(newStatus)}>{buttonText}</button>
+    <button type="button" id="request-helper-view-button" className="btn btn-primary" onClick={() => changeSelectedRequestStatus(newStatus)}>{buttonText}</button>
   );
 }
