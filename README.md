@@ -2,6 +2,8 @@
 
 Rocket Academy SWE1 Project 4: full-stack React app
 
+## [Website](https://freight-buddy.herokuapp.com/)
+
 ## Technologies used
 
 - Database: PostgreSQL
