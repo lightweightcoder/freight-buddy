@@ -1,9 +1,6 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import methodOverride from 'method-override';
-// import webpack from 'webpack';
-// import webpackDevMiddleware from 'webpack-dev-middleware';
-// import webpackHotMiddleware from 'webpack-hot-middleware';
 
 // import webpackConfig from './webpack_conf/webpack.dev.js';
 import bindRoutes from './routes.mjs';
