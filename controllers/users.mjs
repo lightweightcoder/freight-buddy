@@ -273,7 +273,51 @@ export default function users(db) {
     res.send('logged out');
   };
 
+  const demoLogin = async (req, res) => {
+    console.log('post request to login to demo user came in');
+
+    try {
+      const hashedPasswordInput = getHash('demo-user1');
+
+      // try to find the demo user from the database
+      const user = await db.User.findOne(
+        {
+          where: { email: 'demo-user1@gmail.com', password: hashedPasswordInput },
+        },
+      );
+
+      // check if demo user is found
+      if (user === null) {
+        console.log('demo user not found');
+
+        const templateData = {};
+
+        // add message to inform user that there was an error in finding the demo user
+        templateData.invalidMessage = 'Sorry the demo user cannot be logged in right now. Please try registering below instead';
+
+        // render the login form
+        res.render('login', templateData);
+      } else {
+        console.log('found user, logged in!');
+
+        // generate a hashed userId
+        const loggedInHash = getHash(user.id);
+
+        // set cookies with the userId and hashed userId
+        res.cookie('userId', user.id);
+        res.cookie('loggedInHash', loggedInHash);
+
+        // redirect to home page
+        res.redirect('/');
+      }
+    } catch (error) {
+      console.log(error);
+      // send error to browser
+      res.status(500).send(error);
+    }
+  };
+
   return {
-    login, getRegistrationPage, register, requests, favours, logout,
+    login, getRegistrationPage, register, requests, favours, logout, demoLogin,
   };
 }

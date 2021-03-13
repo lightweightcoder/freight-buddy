@@ -142,4 +142,7 @@ export default function routes(app) {
       });
     },
     RequestsController.create);
+
+  // accept a request to login to a demo user
+  app.get('/demo-login', UsersController.demoLogin);
 }

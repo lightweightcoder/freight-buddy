@@ -151,6 +151,19 @@ const usersList = [
     created_at: new Date(),
     updated_at: new Date(),
   },
+  {
+    name: 'Demo User 1',
+    about: 'Hi! Pleased to meet you!',
+    email: 'demo-user1@gmail.com',
+    password: getHash('demo-user1'),
+    bank_name: 'POSB',
+    bank_account_number: '12345678910',
+    address: 'Tenah Merah blk700A #09-891',
+    country_id: 200,
+    photo: '/images/profile-photos/anonymous-person.jpg',
+    created_at: new Date(),
+    updated_at: new Date(),
+  },
 ];
 
 // array of objects containing requests data
