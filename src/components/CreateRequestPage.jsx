@@ -10,8 +10,8 @@ export default function CreateRequestPage({
   const [request, setRequest] = useState({
     productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1, productPhotos: [], payment: '',
   });
-  // to store a message that will be displayed when a user does not fill up form correctly
-  const [invalidMessage, setInvalidMessage] = useState('');
+  // to store a message that will be displayed when a user does not fill up form correctly or when a request is being created
+  const [formMessage, setFormMessage] = useState('');
 
   // create JSX for country options elements for form
   const countryOptionElements = countriesList.map((country) => (
@@ -93,7 +93,7 @@ export default function CreateRequestPage({
     // for product photos, check if its an array of length 0.
     if (!formData.productName || !formData.description || !formData.price || !formData.referenceLink || !formData.shippingAddress || !formData.payment || formData.productPhotos.length === 0) {
       // set an invalid form message to inform user to fill up all the form fields
-      setInvalidMessage('You have not filled up all parts of the form');
+      setFormMessage('You have not filled up all parts of the form');
 
       // exit the function
       return;
@@ -101,6 +101,9 @@ export default function CreateRequestPage({
 
     // if all the form inputs are filled up, create the request
     createRequestAndSetRequestDetailsPage(formData);
+
+    // inform user that request is being created
+    setFormMessage('request is being created. Please wait...');
   };
 
   return (
@@ -175,7 +178,7 @@ export default function CreateRequestPage({
 
               <button type="button" id="create-request-btn" className="btn btn-primary" onClick={() => createRequestBtnClick(request)}>Create Request</button>
             </Form>
-            <p id="new-request-form-invalid-message">{invalidMessage}</p>
+            <p id="new-request-form-message">{formMessage}</p>
           </div>
         </div>
       </div>
