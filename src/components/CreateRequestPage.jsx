@@ -108,7 +108,6 @@ export default function CreateRequestPage({
       <div className="row">
         <div className="col-12">
           <h4 id="new-request-form-heading">New Request</h4>
-          <p id="new-request-form-invalid-message">{invalidMessage}</p>
         </div>
       </div>
 
@@ -176,6 +175,7 @@ export default function CreateRequestPage({
 
               <button type="button" id="create-request-btn" className="btn btn-primary" onClick={() => createRequestBtnClick(request)}>Create Request</button>
             </Form>
+            <p id="new-request-form-invalid-message">{invalidMessage}</p>
           </div>
         </div>
       </div>
