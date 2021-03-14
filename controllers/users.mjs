@@ -274,7 +274,7 @@ export default function users(db) {
   };
 
   const demoLogin = async (req, res) => {
-    console.log('post request to login to demo user came in');
+    console.log('get request to login to demo user came in');
 
     try {
       const hashedPasswordInput = getHash('demo-user1');
@@ -288,15 +288,11 @@ export default function users(db) {
 
       // check if demo user is found
       if (user === null) {
+        // if demo user is not found
         console.log('demo user not found');
 
-        const templateData = {};
-
-        // add message to inform user that there was an error in finding the demo user
-        templateData.invalidMessage = 'Sorry the demo user cannot be logged in right now. Please try registering below instead';
-
-        // render the login form
-        res.render('login', templateData);
+        // send response that login failed
+        res.send({ loginSuccess: false });
       } else {
         console.log('found user, logged in!');
 
@@ -307,8 +303,8 @@ export default function users(db) {
         res.cookie('userId', user.id);
         res.cookie('loggedInHash', loggedInHash);
 
-        // redirect to home page
-        res.redirect('/');
+        // send a success response
+        res.send({ loginSuccess: true });
       }
     } catch (error) {
       console.log(error);
