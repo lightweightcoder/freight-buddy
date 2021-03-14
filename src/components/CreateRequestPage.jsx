@@ -10,6 +10,8 @@ export default function CreateRequestPage({
   const [request, setRequest] = useState({
     productName: '', description: '', price: '', referenceLink: '', shippingAddress: '', status: 'requested', requesterId: user.id, countryId: 1, categoryId: 1, productPhotos: [], payment: '',
   });
+  // to store a message that will be displayed when a user does not fill up form correctly
+  const [invalidMessage, setInvalidMessage] = useState('');
 
   // create JSX for country options elements for form
   const countryOptionElements = countriesList.map((country) => (
@@ -85,11 +87,28 @@ export default function CreateRequestPage({
     setRequest({ ...request, payment: event.target.files[0] });
   };
 
+  // run function when user clicks on the create request button
+  const createRequestBtnClick = (formData) => {
+    // check if any of the form fields are not filled by checking if they are falsy
+    // for product photos, check if its an array of length 0.
+    if (!formData.productName || !formData.description || !formData.price || !formData.referenceLink || !formData.shippingAddress || !formData.payment || formData.productPhotos.length === 0) {
+      // set an invalid form message to inform user to fill up all the form fields
+      setInvalidMessage('You have not filled up all parts of the form');
+
+      // exit the function
+      return;
+    }
+
+    // if all the form inputs are filled up, create the request
+    createRequestAndSetRequestDetailsPage(formData);
+  };
+
   return (
     <div>
       <div className="row">
         <div className="col-12">
           <h4 id="new-request-form-heading">New Request</h4>
+          <p id="new-request-form-invalid-message">{invalidMessage}</p>
         </div>
       </div>
 
@@ -155,7 +174,7 @@ export default function CreateRequestPage({
                 </Form.Text>
               </Form.Group>
 
-              <button type="button" id="create-request-btn" className="btn btn-primary" onClick={() => createRequestAndSetRequestDetailsPage(request)}>Create Request</button>
+              <button type="button" id="create-request-btn" className="btn btn-primary" onClick={() => createRequestBtnClick(request)}>Create Request</button>
             </Form>
           </div>
         </div>
