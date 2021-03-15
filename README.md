@@ -31,3 +31,6 @@ Click the gif below to view the demo of freight buddy
 4. The user decides to accept the request and is now a helper of that request.
 5. After shipping the product, the helper updates the status of the request on the app.
 6. After receiving the product, the requester updates the status of the request to complete the whole process.
+
+## More Info
+For more information such as wireframes and ERD, the documents are located in the planning-docs folder.
