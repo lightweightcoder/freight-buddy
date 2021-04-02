@@ -245,6 +245,7 @@ export default function App() {
       });
   }, []);
 
+  // use the 'page' state variable to control which page gets displayed
   return (
     <div>
       <AppErrorBoundary>

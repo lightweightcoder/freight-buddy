@@ -202,8 +202,9 @@ export default function requests(db) {
       // get the delivery request from request body.
       // this will contain details to create a request in the DB
       const request = req.body;
-      // add the payment filename to the delivery request details
+      // add the payment filename to the delivery request details (for local storage)
       // request.paymentFilename = `/images/request-photos/${req.paymentFile.filename}`;
+
       // add the payment filename to the delivery request details (for aws-s3)
       request.paymentFilename = req.paymentFile.location;
 
@@ -225,7 +226,8 @@ export default function requests(db) {
         productPhotosData.push({
           requestId: newRequest.id,
           // for local storage
-          // filename: `/images/request-photos/${productPhotosFiles[i].filename}`,
+          // filename: `/images/request-photos/${productPhotosFiles[i].filename}`
+
           // for aws-s3 storage
           filename: productPhotosFiles[i].location,
         });

@@ -33,6 +33,5 @@ export default function CarouselItems({ selectedRequest }) {
     );
   }
 
-  console.log('carouselItems', carouselItems);
   return carouselItems;
 }

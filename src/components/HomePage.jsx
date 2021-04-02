@@ -7,6 +7,7 @@ export default function HomePage({ selectAndViewARequestPageHelper, availableReq
     return <div />;
   }
 
+  // if there are no available requests, display a message to inform the user
   if (availableRequests.length === 0) {
     return (
       <div className="container">
