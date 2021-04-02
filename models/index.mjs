@@ -9,6 +9,9 @@ import initUserModel from './user.mjs';
 import initRequestModel from './request.mjs';
 import initProductPhotoModel from './productPhoto.mjs';
 
+// get the env variable
+// when app is deployed to Heroku, NODE_ENV is by default set to 'production'
+// in the local environment, there is no NODE_ENV set so use 'development'
 const env = process.env.NODE_ENV || 'development';
 
 const config = allConfig[env];
@@ -19,7 +22,6 @@ let sequelize;
 
 if (env === 'production') {
   // break apart the Heroku database url and rebuild the configs we need
-
   const { DATABASE_URL } = process.env;
   const dbUrl = url.parse(DATABASE_URL);
   const username = dbUrl.auth.substr(0, dbUrl.auth.indexOf(':'));

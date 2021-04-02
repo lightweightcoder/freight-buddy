@@ -1,3 +1,4 @@
+// database configurations for development and production environments
 module.exports = {
   development: {
     username: 'aljt',

@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
@@ -11,6 +12,7 @@ module.exports = merge(common, {
   },
   mode: 'development',
   devtool: 'inline-source-map',
+  // every time we save changes to files that webpack compiles, webpack will reload and output the updated files
   watch: true,
   module: {
     rules: [

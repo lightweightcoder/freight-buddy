@@ -37,15 +37,19 @@ if (env === 'development') {
   const { default: webpackDevMiddleware } =  await import('webpack-dev-middleware');
   const { default: webpackHotMiddleware } = await import('webpack-hot-middleware');
 
+  // import the webpack configs for development
   const { default: webpackConfig } = await import('./webpack_conf/webpack.dev.js');
 
+  // use the development configs for webpack
   const compiler = webpack(webpackConfig);
 
+  // run the webpack middleware for webpack to compile files on save
   app.use(webpackDevMiddleware(compiler, {
     publicPath: webpackConfig.output.publicPath,
     // html only
     writeToDisk: (filePath) => /\.html$/.test(filePath),
   }));
+  // run the webpack middleware for webpack to compile files on save
   app.use(webpackHotMiddleware(compiler, {
     log: false,
     path: '/__webpack_hmr',

@@ -48,7 +48,7 @@ export default function routes(app) {
   //   ]);
 
   // multer settings for heroku deployment ------------------------
-  // configure the aws-sdk and multerS3 libraries
+  // configure the aws-sdk and multerS3 libraries for authentication
   const s3 = new aws.S3({
     accessKeyId: process.env.ACCESSKEYID,
     secretAccessKey: process.env.SECRETACCESSKEY,
@@ -57,6 +57,7 @@ export default function routes(app) {
   // set the name of the upload directory here for multer for heroku deployment
   // and generate a middleware to process multiple files
   const multerRequestPhotosUpload = multer({
+    // storage configurations
     storage: multerS3({
       s3,
       bucket: 'aljt-heroku',
@@ -69,6 +70,7 @@ export default function routes(app) {
       },
     }),
   }).fields([
+    // multer will find files stored in these fields in the request body object and upload them
     {
       name: 'productPhotos',
     },
